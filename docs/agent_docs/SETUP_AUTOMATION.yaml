@@ -1,0 +1,213 @@
+# Multi-Agent Flow Automation Configuration
+# This file defines loop parameters, agent settings, and operational constraints
+# Framework: Human ↔ Planner ↔ Actor ↔ Judge
+
+loop:
+  # Entry point: automation begins when Human sets SIGNAL BLOCK Next: Planner
+  start_agent: planner
+
+  # Maximum consecutive Judge INSUFFICIENT results before pause
+  # After 5 INSUFFICIENT, Judge pauses and escalates to Human
+  max_consecutive_insufficient: 5
+
+  # Human approval checkpoints enabled
+  # Judge prompts Human before commits/merges
+  human_approval_checkpoints: true
+
+  # Path to active cycle tracking file
+  context_path: docs/context/current_cycle.md
+
+  # Archive completed cycles here
+  archive_path: docs/context/archive
+
+  # Maximum cycle duration (minutes)
+  max_duration: 30
+
+agents:
+  planner:
+    temperature: 0.1          # Creative problem-solving
+    top_p: 0.9
+    max_tokens: 2500
+    max_plan_loc: 50          # Max LOC in plan description
+    max_context_docs: 2       # Max additional docs to reference
+    time_budget: 3            # minutes
+
+  actor:
+    temperature: 0.0          # Precise execution
+    top_p: 0.9
+    max_tokens: 3000
+    max_execution_loc: 150    # Max LOC modified per step (or ≤2 files)
+    max_files_modified: 2     # Max files touched per step
+    time_budget: 5            # minutes
+
+    # Block these destructive patterns
+    forbidden_commands:
+      - "rm -rf"
+      - "DROP TABLE"
+      - "DROP DATABASE"
+      - "DELETE FROM.*WHERE 1=1"
+
+  judge:
+    temperature: 0.0          # Strict validation
+    top_p: 0.9
+    max_tokens: 2000
+    time_budget: 5            # minutes
+
+    # Always run these checks
+    required_checks:
+      - existing_tests        # Run all tests in test suite
+      - linter                # Code quality checks
+      - security_scan         # Credential leaks, auth bypass detection
+
+    # Scope validation
+    validate_scope: true      # Verify Actor stayed within LOC/file limits
+
+    # Pause after N consecutive INSUFFICIENT
+    pause_threshold: 5
+
+paths:
+  # Documentation root
+  docs: docs/agent_docs
+
+  # Visual assets storage
+  assets: docs/context/assets
+
+  # Context tracking
+  context: docs/context
+
+  # Agent implementations
+  agents: agents
+
+risk_gates:
+  # Judge enforces risk-based approval workflows
+
+  low:
+    operations:
+      - refactor
+      - documentation
+      - tests
+      - comments
+    # Judge auto-approves after tests pass, then prompts Human for commit/merge
+    judge_auto_approve: true
+    require_human_commit_approval: true
+
+  medium:
+    operations:
+      - api_changes
+      - schema_migrations
+      - dependencies
+      - configuration
+    # Judge prompts Human for explicit approval before proceeding
+    judge_auto_approve: false
+    require_human_approval: true
+
+  high:
+    operations:
+      - authentication
+      - authorization
+      - data_deletion
+      - secrets_management
+      - deployment
+    # Judge blocks, requires elevated Human approval + audit trail
+    judge_auto_approve: false
+    block_and_escalate: true
+    require_audit_trail: true
+
+logging:
+  # Log level: debug | info | warn | error
+  level: info
+
+  # Append to cycle context
+  log_to_context: true
+
+  # Signal blocks for automation hooks
+  # Format: - Agent: [Human|Planner|Actor|Judge]
+  #         - Result: [INIT|PLAN_CREATED|PLAN_UPDATED|SUCCESS|FAIL|PASS|INSUFFICIENT]
+  #         - Next: [Planner|Actor|Judge|Human]
+  emit_signal_blocks: true
+
+notifications:
+  # Notify on cycle completion (Judge PASS + Human approval)
+  on_complete: true
+
+  # Notify on errors/blockers
+  on_error: true
+
+  # Notify on Judge pause (5 consecutive INSUFFICIENT)
+  on_judge_pause: true
+
+  # Notify on high-risk operations
+  on_high_risk: true
+
+  # Notify when Judge requests Human approval
+  on_human_approval_request: true
+
+# Human checkpoints configuration
+human_checkpoints:
+  # Planner clarifying questions
+  planner_questions_enabled: true
+  planner_question_timeout: 24h  # Human has 24h to respond
+
+  # Judge PASS approval
+  judge_pass_approval_required: true
+  judge_pass_timeout: 24h        # Human has 24h to approve/reject
+
+  # Judge pause (after 5 INSUFFICIENT)
+  judge_pause_notification: true
+
+# Image handling configuration
+images:
+  # Storage path (relative to repo root)
+  storage_path: docs/context/assets
+
+  # Naming convention: YYYY-MM-DD_HH-MM-SS_description.ext
+  timestamp_format: "%Y-%m-%d_%H-%M-%S"
+
+  # Supported formats
+  allowed_formats:
+    - png
+    - jpg
+    - jpeg
+    - svg
+    - pdf
+
+  # Max file size (MB)
+  max_size_mb: 10
+
+  # Require summary in assets/README.md
+  require_cataloging: true
+
+# Judge test battery configuration
+judge_test_battery:
+  # Run existing tests
+  run_existing_tests: true
+  test_timeout: 5m
+
+  # Run linter/formatter
+  run_linter: true
+  linter_config: .eslintrc  # Example, adjust per project
+
+  # Run security scans
+  run_security_scan: true
+  security_tools:
+    - credential_leak_detection
+    - authorization_bypass_check
+
+  # Fail on warnings
+  fail_on_linter_warnings: false
+  fail_on_security_warnings: true
+
+# Archiving configuration
+archiving:
+  # Judge handles archiving after Human approval
+  archive_on_success: true
+  archive_on_pause: true      # After 5 INSUFFICIENT
+  archive_on_failure: true    # After Actor FAIL with blocker
+
+  # Naming convention
+  success_suffix: ""          # YYYY-MM-DD_cycle-NNN.md
+  incomplete_suffix: "_incomplete"
+  failed_suffix: "_failed"
+
+  # Retention (days)
+  retention_days: 365
