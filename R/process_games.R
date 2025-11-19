@@ -1,18 +1,10 @@
 #!/usr/bin/env Rscript
 # process_games.R - Processes raw NFL game data into canonical schema
-# Load required packages
 suppressPackageStartupMessages({
-  library(readr)
-  library(dplyr)
-  library(purrr)
-  library(lubridate)
+  library(readr); library(dplyr); library(purrr); library(lubridate)
 })
 
 #' Process NFL Games for a Given Season
-#'
-#' Loads raw game data from data/raw/<season>_games.csv and normalizes it
-#' into the canonical schema with proper type conversions.
-#'
 #' @param season Integer year (e.g., 2023)
 #' @return A tibble with canonical columns
 process_games <- function(season) {
@@ -121,6 +113,13 @@ main <- function() {
   # Derive last_met_date
   cat("Deriving last_met_date...\n")
   games <- add_last_met_date(games)
+
+  # Filter out undetermined playoff games (TBD teams)
+  tbd_count <- sum(games$home_team == "TBD" | games$away_team == "TBD")
+  if (tbd_count > 0) {
+    games <- games %>% filter(home_team != "TBD" & away_team != "TBD")
+    cat(sprintf("Filtered out %d undetermined playoff games\n", tbd_count))
+  }
 
   # Apply limit and write output
   if (!is.null(limit)) {
