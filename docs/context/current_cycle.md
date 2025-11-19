@@ -62,6 +62,20 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 
 ### Loop Log (Newest → Oldest)
 
+### SIGNAL BLOCK
+- Agent: Actor
+- Result: SUCCESS
+- Step Summary: Loop 2.5/5 (WIN STATE) — Fetched 2020-2022 historical data (842 games), rewrote add_last_met_date() to use full 2020-2025 context, filtered output to 2023-2025 only. Final dataset: 845 games with 92.8% last_met_date coverage (784/845 games), 61 first-time matchups since 2020, 0 NAs in all 11 required fields.
+- Commit: 7f0cbad
+- PR: https://github.com/BrightsizeLife/meta-model-v2/pull/6
+- Validation: Total=845, with_history=784 (92.8%), first_meetings=61 (7.2%), all required fields=0 NAs
+- Reproducible: `Rscript R/process_games.R --all --out data/processed/games_stats.csv`
+- Next: Judge
+# Signature
+Project=meta-model-v2 | Agent=Actor | Step=goal_2.loop_2.5
+
+---
+
 #### loop_2.2 — Planner Brief (Step 2 of ≤5)
 
 **Scope & Context**
@@ -104,6 +118,14 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 - Next: Human
 # Signature
 Project=meta-model-v2 | Agent=Judge | Step=goal_2.loop_2.2
+
+### SIGNAL BLOCK
+- Agent: Judge
+- Result: INSUFFICIENT
+- Step Summary: Loop 2.4/5 — Filtering TBD rows yields 845 games with no NA in required columns, but `last_met_date` remains NA for matchups whose prior meeting occurred before 2023. Planner must define a step to source pre-2023 history (or a supplemental lookup) so repeat opponents get a valid `last_met_date`, fulfilling the win-state.
+- Next: Planner
+# Signature
+Project=meta-model-v2 | Agent=Judge | Step=goal_2.loop_2.4
 
 ### SIGNAL BLOCK
 - Agent: Actor
