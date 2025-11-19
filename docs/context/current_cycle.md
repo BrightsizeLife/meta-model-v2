@@ -65,6 +65,7 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 #### loop_2.1 — Planner Brief (Step 1 of ≤5)
 
 **Scope & Context**
+- Judge escalated Goal #2 with a reminder that the win-state requires a processed CSV covering 2023→present; this loop is the first step toward that deliverable.
 - Raw 2023 schedules/scores already live at `data/raw/2023_games.csv`.
 - Goal #2 Loop 1 (of ≤5) builds the base R processor that ingests the raw file and normalizes the canonical schema without yet writing `data/processed/games_stats.csv`.
 
@@ -72,6 +73,11 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 - Branch: `data/step-2.1-init-processor`
 - Files (≤2): `R/process_games.R` (new)
 - Expected LOC: 90–110 total
+
+**Status & Pointers**
+- Keep referencing this section for guardrails; no other docs needed this loop.
+- Enforce ≤2 files/≤150 LOC, human-readable comments, and R-only implementation.
+- Focus on preview-only processor functionality; writing the processed CSV happens in later loops.
 
 **Actor Task**
 1. Create `R/process_games.R` with a `process_games(season)` function that loads the raw CSV via `readr::read_csv`, selects/renames columns into the canonical schema, enforces type conversions, and returns a tibble. Keep the code extremely simple with human-readable comments.
@@ -94,7 +100,37 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 
   ## Testing
   - Rscript R/process_games.R --season 2023 --preview
+  - Rscript R/process_games.R --all --preview  # Process all seasons (2023-2025)
   ```
+
+### SIGNAL BLOCK
+- Agent: Actor
+- Result: AMENDED
+- Step Summary: Loop 2.1/5 (AMENDED) — Extended coverage to 2023-2025. Added raw data for 2024 (286 games) and 2025 (286 games). Updated R/process_games.R (140 LOC) with --all flag to process all available seasons. Total: 858 games across 3 seasons.
+- Commits: 8063f10, edc0bb2, 8ebec77
+- PR: https://github.com/BrightsizeLife/meta-model-v2/pull/2
+- Validation: `Rscript R/process_games.R --all --preview` → 858 games processed successfully
+- Next: Judge
+# Signature
+Project=meta-model-v2 | Agent=Actor | Step=goal_2.loop_2.1_amended
+
+---
+
+### SIGNAL BLOCK
+- Agent: Planner
+- Result: READY
+- Step Summary: Loop 2.1/5 — On branch `data/step-2.1-init-processor`, create `R/process_games.R` (≤150 LOC) with process_games() + `--preview` CLI, run `Rscript R/process_games.R --season 2023 --preview`, and document the command output for the Judge.
+- Next: Actor
+# Signature
+Project=meta-model-v2 | Agent=Planner | Step=goal_2.loop_2.1
+
+### SIGNAL BLOCK
+- Agent: Judge
+- Result: INSUFFICIENT
+- Step Summary: Loop 2.1 — Processor only previews 2023 data; win-state requires games_stats coverage “2023 onward.” Planner must sequence 2024/2025 ingestion plus the final processed CSV plan that includes `last_met_date` logic.
+- Next: Planner
+# Signature
+Project=meta-model-v2 | Agent=Judge | Step=goal_2.loop_2.3
 
 ### SIGNAL BLOCK
 - Agent: Actor
@@ -107,14 +143,6 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 Project=meta-model-v2 | Agent=Actor | Step=goal_2.loop_2.1
 
 ---
-
-### SIGNAL BLOCK (Planner)
-- Agent: Planner
-- Result: READY
-- Step Summary: Loop 2.1/5 — Scaffold R processor + preview CLI.
-- Next: Actor
-# Signature
-Project=meta-model-v2 | Agent=Planner | Step=goal_2.loop_2.1
 
 
 
