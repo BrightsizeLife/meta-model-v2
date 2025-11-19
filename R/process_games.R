@@ -70,17 +70,32 @@ process_games <- function(season) {
   return(processed)
 }
 
-#' Add Last Met Date to Processed Games
-#' Derives last_met_date by finding previous meeting between same two teams
+#' Add Last Met Date using full historical context (2020+)
 add_last_met_date <- function(games) {
-  games %>%
-    mutate(matchup_key = ifelse(home_team < away_team,
-                                  paste(home_team, away_team),
+  raw_files <- list.files("data/raw", pattern = "^\\d{4}_games\\.csv$", full.names = TRUE)
+  all_seasons <- sort(as.integer(gsub(".*/(\\d{4})_games\\.csv", "\\1", raw_files)))
+
+  historical_games <- bind_rows(lapply(all_seasons, function(s) {
+    read_csv(sprintf("data/raw/%d_games.csv", s), col_types = cols(.default = "c"),
+             show_col_types = FALSE) %>%
+      mutate(kickoff_time = as.POSIXct(kickoff_time, format = "%Y-%m-%dT%H:%M", tz = "UTC")) %>%
+      select(home_team, away_team, kickoff_time)
+  }))
+
+  matchup_history <- historical_games %>%
+    mutate(matchup_key = ifelse(home_team < away_team, paste(home_team, away_team),
                                   paste(away_team, home_team))) %>%
     arrange(matchup_key, kickoff_time) %>%
     group_by(matchup_key) %>%
     mutate(last_met_date = lag(as.Date(kickoff_time))) %>%
-    ungroup() %>%
+    ungroup()
+
+  games %>%
+    select(-last_met_date) %>%
+    mutate(matchup_key = ifelse(home_team < away_team, paste(home_team, away_team),
+                                  paste(away_team, home_team))) %>%
+    left_join(matchup_history %>% select(home_team, away_team, kickoff_time, last_met_date),
+              by = c("home_team", "away_team", "kickoff_time")) %>%
     select(-matchup_key)
 }
 
@@ -97,35 +112,23 @@ main <- function() {
     if (args[i] == "--limit" && i < length(args)) limit <- as.integer(args[i + 1])
   }
 
-  # Process games
   if (process_all) {
     raw_files <- list.files("data/raw", pattern = "^\\d{4}_games\\.csv$", full.names = TRUE)
-    if (length(raw_files) == 0) stop("No raw game files found in data/raw/")
+    if (length(raw_files) == 0) stop("No raw game files found")
     seasons <- sort(as.integer(gsub(".*/(\\d{4})_games\\.csv", "\\1", raw_files)))
+    seasons <- seasons[seasons >= 2023]
     cat(sprintf("Processing %d seasons: %s\n", length(seasons), paste(seasons, collapse = ", ")))
     games <- bind_rows(lapply(seasons, process_games))
   } else if (!is.null(season)) {
     games <- process_games(season)
   } else {
-    stop("Usage: Rscript R/process_games.R --season YYYY [--out PATH] [--limit N] [--preview] OR --all [--out PATH] [--preview]")
+    stop("Usage: Rscript R/process_games.R --season YYYY [--out PATH] [--limit N] [--preview] OR --all [--preview]")
   }
 
-  # Derive last_met_date
-  cat("Deriving last_met_date...\n")
-  games <- add_last_met_date(games)
+  cat("Deriving last_met_date with historical context...\n")
+  games <- add_last_met_date(games) %>% filter(home_team != "TBD" & away_team != "TBD")
 
-  # Filter out undetermined playoff games (TBD teams)
-  tbd_count <- sum(games$home_team == "TBD" | games$away_team == "TBD")
-  if (tbd_count > 0) {
-    games <- games %>% filter(home_team != "TBD" & away_team != "TBD")
-    cat(sprintf("Filtered out %d undetermined playoff games\n", tbd_count))
-  }
-
-  # Apply limit and write output
-  if (!is.null(limit)) {
-    games <- head(games, limit)
-    cat(sprintf("Limited to first %d games\n", limit))
-  }
+  if (!is.null(limit)) games <- head(games, limit)
   if (!is.null(out_path)) {
     write_csv(games, out_path)
     cat(sprintf("✓ Wrote %d games to %s\n", nrow(games), out_path))
