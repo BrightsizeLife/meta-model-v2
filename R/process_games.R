@@ -88,24 +88,39 @@ main <- function() {
   args <- commandArgs(trailingOnly = TRUE)
 
   season <- NULL
+  process_all <- FALSE
   preview <- FALSE
 
   for (i in seq_along(args)) {
     if (args[i] == "--season" && i < length(args)) {
       season <- as.integer(args[i + 1])
     }
+    if (args[i] == "--all") {
+      process_all <- TRUE
+    }
     if (args[i] == "--preview") {
       preview <- TRUE
     }
   }
 
-  # Validate required arguments
-  if (is.null(season)) {
-    stop("Usage: Rscript R/process_games.R --season YYYY [--preview]")
-  }
+  # Process games based on flags
+  if (process_all) {
+    # Find all raw game CSV files
+    raw_files <- list.files("data/raw", pattern = "^\\d{4}_games\\.csv$", full.names = TRUE)
+    if (length(raw_files) == 0) {
+      stop("No raw game files found in data/raw/")
+    }
 
-  # Process the games
-  games <- process_games(season)
+    # Extract seasons and process each
+    seasons <- sort(as.integer(gsub(".*/(\\d{4})_games\\.csv", "\\1", raw_files)))
+    cat(sprintf("Processing %d seasons: %s\n", length(seasons), paste(seasons, collapse = ", ")))
+
+    games <- bind_rows(lapply(seasons, process_games))
+  } else if (!is.null(season)) {
+    games <- process_games(season)
+  } else {
+    stop("Usage: Rscript R/process_games.R --season YYYY [--preview] OR --all [--preview]")
+  }
 
   # Handle preview mode
   if (preview) {
