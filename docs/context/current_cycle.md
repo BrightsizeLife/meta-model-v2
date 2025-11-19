@@ -62,6 +62,62 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 
 ### Loop Log (Newest → Oldest)
 
+#### loop_2.2 — Planner Brief (Step 2 of ≤5)
+
+**Scope & Context**
+- Judge (goal_2.loop_2.4) requires that we persist a processed CSV and begin populating `last_met_date`.
+- Seasons 2023–2025 raw files already exist, and `R/process_games.R` can preview them; this loop upgrades it to write a limited processed artifact.
+- To stay within ≤150 LOC, the committed CSV may be a small subset (≤25 rows) so long as it follows the canonical schema and includes derived features.
+
+**Branch / Files / LOC**
+- Branch: `data/step-2.2-write-processed`
+- Files (≤2): `R/process_games.R`, `data/processed/games_stats.csv`
+- Expected LOC: 60–80 in the script plus ≤25 CSV rows (<150 total lines)
+
+**Actor Task**
+1. Extend `R/process_games.R` with a helper (e.g., `add_last_met_date()`) that sorts games by `kickoff_time`, groups by normalized matchup keys, and fills `last_met_date` using the previous meeting’s kickoff date (ISO date). Ensure it works across seasons when `--all` is used.
+2. Add CLI options `--out <path>` and optional `--limit <n>`: when `--out` is provided, optionally trim the tibble to the first `limit` rows (default processes all) before writing with `readr::write_csv`. Keep `--preview` behavior so Judge can inspect the output even when writing.
+3. Execute `Rscript R/process_games.R --season 2023 --out data/processed/games_stats.csv --limit 25 --preview` to generate the initial processed artifact (≤25 rows) and record the command/output in this doc once done.
+
+**Success Criteria (Judge)**
+- Judge reruns the command above and observes both previewed rows and the committed `data/processed/games_stats.csv` with canonical columns, non-null `last_met_date` where historical games exist, and no NA in required fields.
+- Only the specified two files change, total modifications stay within ≤150 LOC, and the CSV subset is reproducible via the documented command.
+
+**Commit & PR**
+- Commit message: `feat: add writer with last_met_date for processed games`
+- PR title: `Write processed games subset with last_met_date`
+- PR summary:
+  ```
+  ## Summary
+  - add a last_met_date derivation helper inside R/process_games.R
+  - support --out/--limit flags so we can write a processed CSV subset
+  - generate data/processed/games_stats.csv (first 25 games from 2023) as an initial artifact
+
+  ## Testing
+  - Rscript R/process_games.R --season 2023 --out data/processed/games_stats.csv --limit 25 --preview
+  ```
+
+### SIGNAL BLOCK
+- Agent: Actor
+- Result: SUCCESS
+- Step Summary: Loop 2.2/5 — Added last_met_date derivation logic + --out/--limit flags to R/process_games.R (150 LOC). Generated data/processed/games_stats.csv with first 25 games from 2023 season, canonical schema validated.
+- Commit: 6f49cb1
+- PR: https://github.com/BrightsizeLife/meta-model-v2/pull/3
+- Validation: `Rscript R/process_games.R --season 2023 --out data/processed/games_stats.csv --limit 25 --preview` → 25 games written with last_met_date derived
+- Next: Judge
+# Signature
+Project=meta-model-v2 | Agent=Actor | Step=goal_2.loop_2.2
+
+---
+
+### SIGNAL BLOCK (Planner)
+- Agent: Planner
+- Result: READY
+- Step Summary: Loop 2.2/5 — Branch `data/step-2.2-write-processed`; add last_met_date + writer, then produce subset CSV via documented command.
+- Next: Actor
+# Signature
+Project=meta-model-v2 | Agent=Planner | Step=goal_2.loop_2.2
+
 #### loop_2.1 — Planner Brief (Step 1 of ≤5)
 
 **Scope & Context**
@@ -102,6 +158,14 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
   - Rscript R/process_games.R --season 2023 --preview
   - Rscript R/process_games.R --all --preview  # Process all seasons (2023-2025)
   ```
+
+### SIGNAL BLOCK
+- Agent: Judge
+- Result: INSUFFICIENT
+- Step Summary: Loop 2.1_amended — Actor added raw 2024/2025 CSVs and `--all` preview, but no processed `data/processed/games_stats.csv` exists and `last_met_date` remains empty. Planner must plan next loop to persist the processed CSV (any subset OK) and start deriving `last_met_date`.
+- Next: Planner
+# Signature
+Project=meta-model-v2 | Agent=Judge | Step=goal_2.loop_2.4
 
 ### SIGNAL BLOCK
 - Agent: Actor
