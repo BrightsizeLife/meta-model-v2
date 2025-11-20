@@ -6,7 +6,7 @@ game_id,season,week,home_team,away_team,home_score,away_score,kickoff_time,stadi
 401547398,2023,1,Minnesota Vikings,Tampa Bay Buccaneers,17,20,2023-09-10T17:00:00Z,U.S. Bank Stadium,Sunday,17:00,2020-12-13
 401547399,2023,1,New Orleans Saints,Tennessee Titans,16,15,2023-09-10T17:00:00Z,Caesars Superdome,Sunday,17:00,2021-11-14
 401547405,2023,1,Pittsburgh Steelers,San Francisco 49ers,7,30,2023-09-10T17:00:00Z,Acrisure Stadium,Sunday,17:00,2019-09-22
-401547406,2023,1,Washington Commanders,Arizona Cardinals,20,16,2023-09-10T17:00:00Z,Northwest Stadium,Sunday,17:00,2023-09-10
+401547406,2023,1,Washington Commanders,Arizona Cardinals,20,16,2023-09-10T17:00:00Z,Northwest Stadium,Sunday,17:00,2018-09-09
 401547396,2023,1,Baltimore Ravens,Houston Texans,25,9,2023-09-10T17:00:00Z,M&T Bank Stadium,Sunday,17:00,2020-09-20
 401547407,2023,1,Chicago Bears,Green Bay Packers,20,38,2023-09-10T20:25:00Z,Soldier Field,Sunday,20:25,2022-12-04
 401547400,2023,1,Denver Broncos,Las Vegas Raiders,16,17,2023-09-10T20:25:00Z,Empower Field at Mile High,Sunday,20:25,2022-11-20
@@ -297,7 +297,7 @@ game_id,season,week,home_team,away_team,home_score,away_score,kickoff_time,stadi
 401671659,2024,1,Los Angeles Chargers,Las Vegas Raiders,22,10,2024-09-08T20:05:00Z,SoFi Stadium,Sunday,20:05,2023-12-15
 401671664,2024,1,Seattle Seahawks,Denver Broncos,26,20,2024-09-08T20:05:00Z,Lumen Field,Sunday,20:05,2022-09-13
 401671761,2024,1,Cleveland Browns,Dallas Cowboys,17,33,2024-09-08T20:25:00Z,Huntington Bank Field,Sunday,20:25,2020-10-04
-401671770,2024,1,Tampa Bay Buccaneers,Washington Commanders,37,20,2024-09-08T20:25:00Z,Raymond James Stadium,Sunday,20:25,2024-09-08
+401671770,2024,1,Tampa Bay Buccaneers,Washington Commanders,37,20,2024-09-08T20:25:00Z,Raymond James Stadium,Sunday,20:25,2018-11-11
 401671792,2024,1,Detroit Lions,Los Angeles Rams,26,20,2024-09-09T00:20:00Z,Ford Field,Monday,00:20,2024-01-15
 401671696,2024,1,San Francisco 49ers,New York Jets,32,19,2024-09-10T00:15:00Z,Levi's Stadium,Tuesday,00:15,2020-09-20
 401671807,2024,2,Miami Dolphins,Buffalo Bills,10,31,2024-09-13T00:15:00Z,Hard Rock Stadium,Friday,00:15,2024-01-08
@@ -386,7 +386,7 @@ game_id,season,week,home_team,away_team,home_score,away_score,kickoff_time,stadi
 401671724,2024,7,Minnesota Vikings,Detroit Lions,29,31,2024-10-20T17:00:00Z,U.S. Bank Stadium,Sunday,17:00,2024-01-07
 401671710,2024,7,New York Giants,Philadelphia Eagles,3,28,2024-10-20T17:00:00Z,MetLife Stadium,Sunday,17:00,2024-01-07
 401671663,2024,7,Los Angeles Rams,Las Vegas Raiders,20,15,2024-10-20T20:05:00Z,SoFi Stadium,Sunday,20:05,2022-12-09
-401671640,2024,7,Washington Commanders,Carolina Panthers,40,7,2024-10-20T20:05:00Z,Northwest Stadium,Sunday,20:05,2024-10-20
+401671640,2024,7,Washington Commanders,Carolina Panthers,40,7,2024-10-20T20:05:00Z,Northwest Stadium,Sunday,20:05,2018-10-14
 401671777,2024,7,San Francisco 49ers,Kansas City Chiefs,18,28,2024-10-20T20:25:00Z,Levi's Stadium,Sunday,20:25,2024-02-11
 401671785,2024,7,Pittsburgh Steelers,New York Jets,37,15,2024-10-21T00:20:00Z,Acrisure Stadium,Monday,00:20,2022-10-02
 401671695,2024,7,Tampa Bay Buccaneers,Baltimore Ravens,31,41,2024-10-22T00:15:00Z,Raymond James Stadium,Tuesday,00:15,2022-10-28
@@ -495,7 +495,7 @@ game_id,season,week,home_team,away_team,home_score,away_score,kickoff_time,stadi
 401671818,2024,15,San Francisco 49ers,Los Angeles Rams,6,12,2024-12-13T01:15:00Z,Levi's Stadium,Friday,01:15,2024-09-22
 401671854,2024,15,Cleveland Browns,Kansas City Chiefs,7,21,2024-12-15T18:00:00Z,Huntington Bank Field,Sunday,18:00,2021-09-12
 401671825,2024,15,Tennessee Titans,Cincinnati Bengals,27,37,2024-12-15T18:00:00Z,Nissan Stadium,Sunday,18:00,2023-10-01
-401671737,2024,15,New Orleans Saints,Washington Commanders,19,20,2024-12-15T18:00:00Z,Caesars Superdome,Sunday,18:00,2024-12-15
+401671737,2024,15,New Orleans Saints,Washington Commanders,19,20,2024-12-15T18:00:00Z,Caesars Superdome,Sunday,18:00,2018-10-09
 401671639,2024,15,New York Giants,Baltimore Ravens,14,35,2024-12-15T18:00:00Z,MetLife Stadium,Sunday,18:00,2022-10-16
 401671731,2024,15,Carolina Panthers,Dallas Cowboys,14,30,2024-12-15T18:00:00Z,Bank of America Stadium,Sunday,18:00,2023-11-19
 401671706,2024,15,Jacksonville Jaguars,New York Jets,25,32,2024-12-15T18:00:00Z,EverBank Stadium,Sunday,18:00,2022-12-23
