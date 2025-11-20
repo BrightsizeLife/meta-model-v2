@@ -70,6 +70,17 @@ process_games <- function(season) {
   return(processed)
 }
 
+#' Normalize Team Names (handle rebrands and relocations)
+normalize_team_name <- function(team) {
+  case_when(
+    team == "Washington Redskins" ~ "Washington Commanders",
+    team == "Oakland Raiders" ~ "Las Vegas Raiders",
+    team == "San Diego Chargers" ~ "Los Angeles Chargers",
+    team == "St. Louis Rams" ~ "Los Angeles Rams",
+    TRUE ~ team
+  )
+}
+
 #' Add Last Met Date using full historical context (2019+)
 add_last_met_date <- function(games) {
   raw_files <- list.files("data/raw", pattern = "^\\d{4}_games\\.csv$", full.names = TRUE)
@@ -79,6 +90,8 @@ add_last_met_date <- function(games) {
     read_csv(sprintf("data/raw/%d_games.csv", s), col_types = cols(.default = "c"),
              show_col_types = FALSE) %>%
       mutate(kickoff_time = as.POSIXct(kickoff_time, format = "%Y-%m-%dT%H:%M", tz = "UTC")) %>%
+      mutate(home_team = normalize_team_name(home_team), away_team = normalize_team_name(away_team)) %>%
+      filter(home_team != "AFC" & home_team != "NFC" & away_team != "AFC" & away_team != "NFC") %>%
       select(home_team, away_team, kickoff_time)
   }))
 
@@ -92,11 +105,13 @@ add_last_met_date <- function(games) {
 
   games %>%
     select(-last_met_date) %>%
-    mutate(matchup_key = ifelse(home_team < away_team, paste(home_team, away_team),
-                                  paste(away_team, home_team))) %>%
+    mutate(home_team_norm = normalize_team_name(home_team), away_team_norm = normalize_team_name(away_team)) %>%
+    mutate(matchup_key = ifelse(home_team_norm < away_team_norm, paste(home_team_norm, away_team_norm),
+                                  paste(away_team_norm, home_team_norm))) %>%
     left_join(matchup_history %>% select(home_team, away_team, kickoff_time, last_met_date),
-              by = c("home_team", "away_team", "kickoff_time")) %>%
-    select(-matchup_key)
+              by = c("home_team_norm" = "home_team", "away_team_norm" = "away_team", "kickoff_time")) %>%
+    mutate(last_met_date = if_else(is.na(last_met_date), as.Date(kickoff_time), last_met_date)) %>%
+    select(-matchup_key, -home_team_norm, -away_team_norm)
 }
 
 #' Main CLI Entry Point - parses args and executes workflow
@@ -126,7 +141,8 @@ main <- function() {
   }
 
   cat("Deriving last_met_date with historical context...\n")
-  games <- add_last_met_date(games) %>% filter(home_team != "TBD" & away_team != "TBD")
+  games <- add_last_met_date(games) %>%
+    filter(home_team != "TBD" & away_team != "TBD" & home_team != "AFC" & home_team != "NFC" & away_team != "AFC" & away_team != "NFC")
 
   if (!is.null(limit)) games <- head(games, limit)
   if (!is.null(out_path)) {
