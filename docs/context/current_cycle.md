@@ -63,6 +63,18 @@ Every agent must end their step with a SIGNAL BLOCK indicating:
 ### Loop Log (Newest → Oldest)
 
 ### SIGNAL BLOCK
+- Agent: Actor
+- Result: COMPLETE
+- Step Summary: Loop 2.5/5 (MERGED) — PR #6 merged successfully into core/init-repo-structure. Branch data/step-2.5-historical-matchups deleted. Goal 2 achieved within 5 loops.
+- Merge Commit: 7c95c92
+- Final State: data/processed/games_stats.csv (845 games, 2023-2025), all win-state criteria met
+- Next: Human (for Goal 3 planning)
+# Signature
+Project=meta-model-v2 | Agent=Actor | Step=goal_2.loop_2.5.final
+
+---
+
+### SIGNAL BLOCK
 - Agent: Judge
 - Result: PASS — GOAL 2 COMPLETE
 - Step Summary: Loop 2.5/5 (FINAL) — Verified reproducibility, schema compliance, and win state achievement. All criteria met: 845 games (2023-2025), 0 NAs in 11 required fields, last_met_date with 92.8% historical coverage (784/845), 61 valid first-time matchups, 133 non-blank LOC (≤150), reproducible via documented command.
