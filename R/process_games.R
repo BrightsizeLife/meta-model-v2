@@ -70,7 +70,7 @@ process_games <- function(season) {
   return(processed)
 }
 
-#' Add Last Met Date using full historical context (2020+)
+#' Add Last Met Date using full historical context (2019+)
 add_last_met_date <- function(games) {
   raw_files <- list.files("data/raw", pattern = "^\\d{4}_games\\.csv$", full.names = TRUE)
   all_seasons <- sort(as.integer(gsub(".*/(\\d{4})_games\\.csv", "\\1", raw_files)))
