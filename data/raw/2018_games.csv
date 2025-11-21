@@ -1,0 +1,269 @@
+"game_id","season","week","home_team","away_team","home_score","away_score","kickoff_time","stadium","day","time","last_met_date"
+"401030710",2018,1,"Philadelphia Eagles","Atlanta Falcons",18,12,"2018-09-07T00:55Z","Lincoln Financial Field","Friday","00:55",NA
+"401030718",2018,1,"Cleveland Browns","Pittsburgh Steelers",21,21,"2018-09-09T17:00Z","Huntington Bank Field","Sunday","17:00",NA
+"401030717",2018,1,"Indianapolis Colts","Cincinnati Bengals",23,34,"2018-09-09T17:00Z","Lucas Oil Stadium","Sunday","17:00",NA
+"401030716",2018,1,"Miami Dolphins","Tennessee Titans",27,20,"2018-09-09T17:00Z","Hard Rock Stadium","Sunday","17:00",NA
+"401030715",2018,1,"Minnesota Vikings","San Francisco 49ers",24,16,"2018-09-09T17:00Z","U.S. Bank Stadium","Sunday","17:00",NA
+"401030714",2018,1,"New England Patriots","Houston Texans",27,20,"2018-09-09T17:00Z","Gillette Stadium","Sunday","17:00",NA
+"401030713",2018,1,"New Orleans Saints","Tampa Bay Buccaneers",40,48,"2018-09-09T17:00Z","Caesars Superdome","Sunday","17:00",NA
+"401030712",2018,1,"New York Giants","Jacksonville Jaguars",15,20,"2018-09-09T17:00Z","MetLife Stadium","Sunday","17:00",NA
+"401030711",2018,1,"Baltimore Ravens","Buffalo Bills",47,3,"2018-09-09T17:00Z","M&T Bank Stadium","Sunday","17:00",NA
+"401030720",2018,1,"Los Angeles Chargers","Kansas City Chiefs",28,38,"2018-09-09T20:05Z","Dignity Health Sports Park","Sunday","20:05",NA
+"401030721",2018,1,"Denver Broncos","Seattle Seahawks",27,24,"2018-09-09T20:25Z","Empower Field at Mile High","Sunday","20:25",NA
+"401030725",2018,1,"Arizona Cardinals","Washington Redskins",6,24,"2018-09-09T20:25Z","State Farm Stadium","Sunday","20:25",NA
+"401030723",2018,1,"Carolina Panthers","Dallas Cowboys",16,8,"2018-09-09T20:25Z","Bank of America Stadium","Sunday","20:25",NA
+"401030726",2018,1,"Green Bay Packers","Chicago Bears",24,23,"2018-09-10T00:20Z","Lambeau Field","Monday","00:20",NA
+"401030728",2018,1,"Detroit Lions","New York Jets",17,48,"2018-09-10T23:10Z","Ford Field","Monday","23:10",NA
+"401030751",2018,1,"Oakland Raiders","Los Angeles Rams",13,33,"2018-09-11T02:20Z","Oakland Coliseum","Tuesday","02:20",NA
+"401030690",2018,2,"Cincinnati Bengals","Baltimore Ravens",34,23,"2018-09-14T00:20Z","Paycor Stadium","Friday","00:20",NA
+"401030691",2018,2,"Atlanta Falcons","Carolina Panthers",31,24,"2018-09-16T17:00Z","Mercedes-Benz Stadium","Sunday","17:00",NA
+"401030704",2018,2,"Buffalo Bills","Los Angeles Chargers",20,31,"2018-09-16T17:00Z","Highmark Stadium","Sunday","17:00",NA
+"401030705",2018,2,"Green Bay Packers","Minnesota Vikings",29,29,"2018-09-16T17:00Z","Lambeau Field","Sunday","17:00",NA
+"401030694",2018,2,"Tennessee Titans","Houston Texans",20,17,"2018-09-16T17:00Z","Nissan Stadium","Sunday","17:00",NA
+"401030708",2018,2,"New Orleans Saints","Cleveland Browns",21,18,"2018-09-16T17:00Z","Caesars Superdome","Sunday","17:00",NA
+"401030700",2018,2,"New York Jets","Miami Dolphins",12,20,"2018-09-16T17:00Z","MetLife Stadium","Sunday","17:00",NA
+"401030698",2018,2,"Pittsburgh Steelers","Kansas City Chiefs",37,42,"2018-09-16T17:00Z","Acrisure Stadium","Sunday","17:00",NA
+"401030696",2018,2,"Tampa Bay Buccaneers","Philadelphia Eagles",27,21,"2018-09-16T17:00Z","Raymond James Stadium","Sunday","17:00",NA
+"401030693",2018,2,"Washington Redskins","Indianapolis Colts",9,21,"2018-09-16T17:00Z","Northwest Stadium","Sunday","17:00",NA
+"401030732",2018,2,"Los Angeles Rams","Arizona Cardinals",34,0,"2018-09-16T20:05Z","Los Angeles Memorial Coliseum","Sunday","20:05",NA
+"401030730",2018,2,"San Francisco 49ers","Detroit Lions",30,27,"2018-09-16T20:05Z","Levi's Stadium","Sunday","20:05",NA
+"401030736",2018,2,"Denver Broncos","Oakland Raiders",20,19,"2018-09-16T20:25Z","Empower Field at Mile High","Sunday","20:25",NA
+"401030733",2018,2,"Jacksonville Jaguars","New England Patriots",31,20,"2018-09-16T20:25Z","EverBank Stadium","Sunday","20:25",NA
+"401030738",2018,2,"Dallas Cowboys","New York Giants",20,13,"2018-09-17T00:20Z","AT&T Stadium","Monday","00:20",NA
+"401030739",2018,2,"Chicago Bears","Seattle Seahawks",24,17,"2018-09-18T00:15Z","Soldier Field","Tuesday","00:15",NA
+"401030775",2018,3,"Cleveland Browns","New York Jets",21,17,"2018-09-21T00:20Z","Huntington Bank Field","Friday","00:20",NA
+"401030777",2018,3,"Atlanta Falcons","New Orleans Saints",37,43,"2018-09-23T17:00Z","Mercedes-Benz Stadium","Sunday","17:00",NA
+"401030795",2018,3,"Kansas City Chiefs","San Francisco 49ers",38,27,"2018-09-23T17:00Z","GEHA Field at Arrowhead Stadium","Sunday","17:00",NA
+"401030787",2018,3,"Miami Dolphins","Oakland Raiders",28,20,"2018-09-23T17:00Z","Hard Rock Stadium","Sunday","17:00",NA
+"401030784",2018,3,"Minnesota Vikings","Buffalo Bills",6,27,"2018-09-23T17:00Z","U.S. Bank Stadium","Sunday","17:00",NA
+"401030782",2018,3,"Philadelphia Eagles","Indianapolis Colts",20,16,"2018-09-23T17:00Z","Lincoln Financial Field","Sunday","17:00",NA
+"401030781",2018,3,"Washington Redskins","Green Bay Packers",31,17,"2018-09-23T17:00Z","Northwest Stadium","Sunday","17:00",NA
+"401030790",2018,3,"Carolina Panthers","Cincinnati Bengals",31,21,"2018-09-23T17:00Z","Bank of America Stadium","Sunday","17:00",NA
+"401030794",2018,3,"Jacksonville Jaguars","Tennessee Titans",6,9,"2018-09-23T17:00Z","EverBank Stadium","Sunday","17:00",NA
+"401030788",2018,3,"Baltimore Ravens","Denver Broncos",27,14,"2018-09-23T17:00Z","M&T Bank Stadium","Sunday","17:00",NA
+"401030791",2018,3,"Houston Texans","New York Giants",22,27,"2018-09-23T17:00Z","NRG Stadium","Sunday","17:00",NA
+"401030798",2018,3,"Los Angeles Rams","Los Angeles Chargers",35,23,"2018-09-23T20:05Z","Los Angeles Memorial Coliseum","Sunday","20:05",NA
+"401030801",2018,3,"Arizona Cardinals","Chicago Bears",14,16,"2018-09-23T20:25Z","State Farm Stadium","Sunday","20:25",NA
+"401030799",2018,3,"Seattle Seahawks","Dallas Cowboys",24,13,"2018-09-23T20:25Z","Lumen Field","Sunday","20:25",NA
+"401030802",2018,3,"Detroit Lions","New England Patriots",26,10,"2018-09-24T00:20Z","Ford Field","Monday","00:20",NA
+"401030805",2018,3,"Tampa Bay Buccaneers","Pittsburgh Steelers",27,30,"2018-09-25T00:15Z","Raymond James Stadium","Tuesday","00:15",NA
+"401030839",2018,4,"Los Angeles Rams","Minnesota Vikings",38,31,"2018-09-28T00:20Z","Los Angeles Memorial Coliseum","Friday","00:20",NA
+"401030847",2018,4,"Atlanta Falcons","Cincinnati Bengals",36,37,"2018-09-30T17:00Z","Mercedes-Benz Stadium","Sunday","17:00",NA
+"401030846",2018,4,"Chicago Bears","Tampa Bay Buccaneers",48,10,"2018-09-30T17:00Z","Soldier Field","Sunday","17:00",NA
+"401030845",2018,4,"Dallas Cowboys","Detroit Lions",26,24,"2018-09-30T17:00Z","AT&T Stadium","Sunday","17:00",NA
+"401030844",2018,4,"Green Bay Packers","Buffalo Bills",22,0,"2018-09-30T17:00Z","Lambeau Field","Sunday","17:00",NA
+"401030842",2018,4,"Tennessee Titans","Philadelphia Eagles",26,23,"2018-09-30T17:00Z","Nissan Stadium","Sunday","17:00",NA
+"401030843",2018,4,"Indianapolis Colts","Houston Texans",34,37,"2018-09-30T17:00Z","Lucas Oil Stadium","Sunday","17:00",NA
+"401030841",2018,4,"New England Patriots","Miami Dolphins",38,7,"2018-09-30T17:00Z","Gillette Stadium","Sunday","17:00",NA
+"401030840",2018,4,"Jacksonville Jaguars","New York Jets",31,12,"2018-09-30T17:00Z","EverBank Stadium","Sunday","17:00",NA
+"401030930",2018,4,"Oakland Raiders","Cleveland Browns",45,42,"2018-09-30T20:05Z","Oakland Coliseum","Sunday","20:05",NA
+"401030848",2018,4,"Arizona Cardinals","Seattle Seahawks",17,20,"2018-09-30T20:05Z","State Farm Stadium","Sunday","20:05",NA
+"401030931",2018,4,"New York Giants","New Orleans Saints",18,33,"2018-09-30T20:25Z","MetLife Stadium","Sunday","20:25",NA
+"401030932",2018,4,"Los Angeles Chargers","San Francisco 49ers",29,27,"2018-09-30T20:25Z","Dignity Health Sports Park","Sunday","20:25",NA
+"401030933",2018,4,"Pittsburgh Steelers","Baltimore Ravens",14,26,"2018-10-01T00:20Z","Acrisure Stadium","Monday","00:20",NA
+"401030934",2018,4,"Denver Broncos","Kansas City Chiefs",23,27,"2018-10-02T00:15Z","Empower Field at Mile High","Tuesday","00:15",NA
+"401030697",2018,5,"New England Patriots","Indianapolis Colts",38,24,"2018-10-05T00:20Z","Gillette Stadium","Friday","00:20",NA
+"401030702",2018,5,"Buffalo Bills","Tennessee Titans",13,12,"2018-10-07T17:00Z","Highmark Stadium","Sunday","17:00",NA
+"401030785",2018,5,"Cincinnati Bengals","Miami Dolphins",27,17,"2018-10-07T17:00Z","Paycor Stadium","Sunday","17:00",NA
+"401030770",2018,5,"Cleveland Browns","Baltimore Ravens",12,9,"2018-10-07T17:00Z","Huntington Bank Field","Sunday","17:00",NA
+"401030745",2018,5,"Detroit Lions","Green Bay Packers",31,23,"2018-10-07T17:00Z","Ford Field","Sunday","17:00",NA
+"401030741",2018,5,"Kansas City Chiefs","Jacksonville Jaguars",30,14,"2018-10-07T17:00Z","GEHA Field at Arrowhead Stadium","Sunday","17:00",NA
+"401030734",2018,5,"New York Jets","Denver Broncos",34,16,"2018-10-07T17:00Z","MetLife Stadium","Sunday","17:00",NA
+"401030709",2018,5,"Pittsburgh Steelers","Atlanta Falcons",41,17,"2018-10-07T17:00Z","Acrisure Stadium","Sunday","17:00",NA
+"401030778",2018,5,"Carolina Panthers","New York Giants",33,31,"2018-10-07T17:00Z","Bank of America Stadium","Sunday","17:00",NA
+"401030793",2018,5,"Los Angeles Chargers","Oakland Raiders",26,10,"2018-10-07T20:05Z","Dignity Health Sports Park","Sunday","20:05",NA
+"401030803",2018,5,"Philadelphia Eagles","Minnesota Vikings",21,23,"2018-10-07T20:25Z","Lincoln Financial Field","Sunday","20:25",NA
+"401030797",2018,5,"San Francisco 49ers","Arizona Cardinals",18,28,"2018-10-07T20:25Z","Levi's Stadium","Sunday","20:25",NA
+"401030808",2018,5,"Seattle Seahawks","Los Angeles Rams",31,33,"2018-10-07T20:25Z","Lumen Field","Sunday","20:25",NA
+"401030831",2018,5,"Houston Texans","Dallas Cowboys",19,16,"2018-10-08T00:20Z","NRG Stadium","Monday","00:20",NA
+"401030834",2018,5,"New Orleans Saints","Washington Redskins",43,19,"2018-10-09T00:15Z","Caesars Superdome","Tuesday","00:15",NA
+"401030692",2018,6,"New York Giants","Philadelphia Eagles",13,34,"2018-10-12T00:20Z","MetLife Stadium","Friday","00:20",NA
+"401030695",2018,6,"Atlanta Falcons","Tampa Bay Buccaneers",34,29,"2018-10-14T17:00Z","Mercedes-Benz Stadium","Sunday","17:00",NA
+"401030743",2018,6,"Cincinnati Bengals","Pittsburgh Steelers",21,28,"2018-10-14T17:00Z","Paycor Stadium","Sunday","17:00",NA
+"401030746",2018,6,"Cleveland Browns","Los Angeles Chargers",14,38,"2018-10-14T17:00Z","Huntington Bank Field","Sunday","17:00",NA
+"401030706",2018,6,"Oakland Raiders","Seattle Seahawks",3,27,"2018-10-14T17:00Z","Wembley Stadium","Sunday","17:00",NA
+"401030771",2018,6,"Miami Dolphins","Chicago Bears",31,28,"2018-10-14T17:00Z","Hard Rock Stadium","Sunday","17:00",NA
+"401030742",2018,6,"Minnesota Vikings","Arizona Cardinals",27,17,"2018-10-14T17:00Z","U.S. Bank Stadium","Sunday","17:00",NA
+"401030737",2018,6,"New York Jets","Indianapolis Colts",42,34,"2018-10-14T17:00Z","MetLife Stadium","Sunday","17:00",NA
+"401030701",2018,6,"Washington Redskins","Carolina Panthers",23,17,"2018-10-14T17:00Z","Northwest Stadium","Sunday","17:00",NA
+"401030748",2018,6,"Houston Texans","Buffalo Bills",20,13,"2018-10-14T17:00Z","NRG Stadium","Sunday","17:00",NA
+"401030773",2018,6,"Denver Broncos","Los Angeles Rams",20,23,"2018-10-14T20:05Z","Empower Field at Mile High","Sunday","20:05",NA
+"401030776",2018,6,"Dallas Cowboys","Jacksonville Jaguars",40,7,"2018-10-14T20:25Z","AT&T Stadium","Sunday","20:25",NA
+"401030774",2018,6,"Tennessee Titans","Baltimore Ravens",0,21,"2018-10-14T20:25Z","Nissan Stadium","Sunday","20:25",NA
+"401030779",2018,6,"New England Patriots","Kansas City Chiefs",43,40,"2018-10-15T00:20Z","Gillette Stadium","Monday","00:20",NA
+"401030783",2018,6,"Green Bay Packers","San Francisco 49ers",33,30,"2018-10-16T00:15Z","Lambeau Field","Tuesday","00:15",NA
+"401030800",2018,7,"Arizona Cardinals","Denver Broncos",10,45,"2018-10-19T00:20Z","State Farm Stadium","Friday","00:20",NA
+"401030792",2018,7,"Los Angeles Chargers","Tennessee Titans",20,19,"2018-10-21T13:30Z","Wembley Stadium","Sunday","13:30",NA
+"401030832",2018,7,"Chicago Bears","New England Patriots",31,38,"2018-10-21T17:00Z","Soldier Field","Sunday","17:00",NA
+"401030833",2018,7,"Indianapolis Colts","Buffalo Bills",37,5,"2018-10-21T17:00Z","Lucas Oil Stadium","Sunday","17:00",NA
+"401030830",2018,7,"Miami Dolphins","Detroit Lions",21,32,"2018-10-21T17:00Z","Hard Rock Stadium","Sunday","17:00",NA
+"401030809",2018,7,"New York Jets","Minnesota Vikings",17,37,"2018-10-21T17:00Z","MetLife Stadium","Sunday","17:00",NA
+"401030807",2018,7,"Philadelphia Eagles","Carolina Panthers",17,21,"2018-10-21T17:00Z","Lincoln Financial Field","Sunday","17:00",NA
+"401030806",2018,7,"Tampa Bay Buccaneers","Cleveland Browns",26,23,"2018-10-21T17:00Z","Raymond James Stadium","Sunday","17:00",NA
+"401030835",2018,7,"Jacksonville Jaguars","Houston Texans",7,20,"2018-10-21T17:00Z","EverBank Stadium","Sunday","17:00",NA
+"401030836",2018,7,"Baltimore Ravens","New Orleans Saints",23,24,"2018-10-21T20:05Z","M&T Bank Stadium","Sunday","20:05",NA
+"401030838",2018,7,"San Francisco 49ers","Los Angeles Rams",10,39,"2018-10-21T20:25Z","Levi's Stadium","Sunday","20:25",NA
+"401030837",2018,7,"Washington Redskins","Dallas Cowboys",20,17,"2018-10-21T20:25Z","Northwest Stadium","Sunday","20:25",NA
+"401030804",2018,7,"Kansas City Chiefs","Cincinnati Bengals",45,10,"2018-10-22T00:20Z","GEHA Field at Arrowhead Stadium","Monday","00:20",NA
+"401030796",2018,7,"Atlanta Falcons","New York Giants",23,20,"2018-10-23T00:15Z","Mercedes-Benz Stadium","Tuesday","00:15",NA
+"401030703",2018,8,"Houston Texans","Miami Dolphins",42,23,"2018-10-26T00:20Z","NRG Stadium","Friday","00:20",NA
+"401030699",2018,8,"Jacksonville Jaguars","Philadelphia Eagles",18,24,"2018-10-28T13:30Z","Wembley Stadium","Sunday","13:30",NA
+"401030747",2018,8,"Chicago Bears","New York Jets",24,10,"2018-10-28T17:00Z","Soldier Field","Sunday","17:00",NA
+"401030744",2018,8,"Cincinnati Bengals","Tampa Bay Buccaneers",37,34,"2018-10-28T17:00Z","Paycor Stadium","Sunday","17:00",NA
+"401030740",2018,8,"Detroit Lions","Seattle Seahawks",14,28,"2018-10-28T17:00Z","Ford Field","Sunday","17:00",NA
+"401030707",2018,8,"Kansas City Chiefs","Denver Broncos",30,23,"2018-10-28T17:00Z","GEHA Field at Arrowhead Stadium","Sunday","17:00",NA
+"401030735",2018,8,"New York Giants","Washington Redskins",13,20,"2018-10-28T17:00Z","MetLife Stadium","Sunday","17:00",NA
+"401030731",2018,8,"Pittsburgh Steelers","Cleveland Browns",33,18,"2018-10-28T17:00Z","Acrisure Stadium","Sunday","17:00",NA
+"401030849",2018,8,"Carolina Panthers","Baltimore Ravens",36,21,"2018-10-28T17:00Z","Bank of America Stadium","Sunday","17:00",NA
+"401030749",2018,8,"Oakland Raiders","Indianapolis Colts",28,42,"2018-10-28T20:05Z","Oakland Coliseum","Sunday","20:05",NA
+"401030780",2018,8,"Los Angeles Rams","Green Bay Packers",29,27,"2018-10-28T20:25Z","Los Angeles Memorial Coliseum","Sunday","20:25",NA
+"401030772",2018,8,"Arizona Cardinals","San Francisco 49ers",18,15,"2018-10-28T20:25Z","State Farm Stadium","Sunday","20:25",NA
+"401030786",2018,8,"Minnesota Vikings","New Orleans Saints",20,30,"2018-10-29T00:20Z","U.S. Bank Stadium","Monday","00:20",NA
+"401030789",2018,8,"Buffalo Bills","New England Patriots",6,25,"2018-10-30T00:15Z","Highmark Stadium","Tuesday","00:15",NA
+"401030767",2018,9,"San Francisco 49ers","Oakland Raiders",34,3,"2018-11-02T00:20Z","Levi's Stadium","Friday","00:20",NA
+"401030769",2018,9,"Buffalo Bills","Chicago Bears",9,41,"2018-11-04T18:00Z","Highmark Stadium","Sunday","18:00",NA
+"401030814",2018,9,"Cleveland Browns","Kansas City Chiefs",21,37,"2018-11-04T18:00Z","Huntington Bank Field","Sunday","18:00",NA
+"401030816",2018,9,"Miami Dolphins","New York Jets",13,6,"2018-11-04T18:00Z","Hard Rock Stadium","Sunday","18:00",NA
+"401030822",2018,9,"Minnesota Vikings","Detroit Lions",24,9,"2018-11-04T18:00Z","U.S. Bank Stadium","Sunday","18:00",NA
+"401030826",2018,9,"Washington Redskins","Atlanta Falcons",14,38,"2018-11-04T18:00Z","Northwest Stadium","Sunday","18:00",NA
+"401030811",2018,9,"Carolina Panthers","Tampa Bay Buccaneers",42,28,"2018-11-04T18:00Z","Bank of America Stadium","Sunday","18:00",NA
+"401030819",2018,9,"Baltimore Ravens","Pittsburgh Steelers",16,23,"2018-11-04T18:00Z","M&T Bank Stadium","Sunday","18:00",NA
+"401030829",2018,9,"Denver Broncos","Houston Texans",17,19,"2018-11-04T21:05Z","Empower Field at Mile High","Sunday","21:05",NA
+"401030852",2018,9,"Seattle Seahawks","Los Angeles Chargers",17,25,"2018-11-04T21:05Z","Lumen Field","Sunday","21:05",NA
+"401030855",2018,9,"New Orleans Saints","Los Angeles Rams",45,35,"2018-11-04T21:25Z","Caesars Superdome","Sunday","21:25",NA
+"401030858",2018,9,"New England Patriots","Green Bay Packers",31,17,"2018-11-05T01:20Z","Gillette Stadium","Monday","01:20",NA
+"401030862",2018,9,"Dallas Cowboys","Tennessee Titans",14,28,"2018-11-06T01:15Z","AT&T Stadium","Tuesday","01:15",NA
+"401030729",2018,10,"Pittsburgh Steelers","Carolina Panthers",52,21,"2018-11-09T01:20Z","Acrisure Stadium","Friday","01:20",NA
+"401030810",2018,10,"Chicago Bears","Detroit Lions",34,22,"2018-11-11T18:00Z","Soldier Field","Sunday","18:00",NA
+"401030752",2018,10,"Cincinnati Bengals","New Orleans Saints",14,51,"2018-11-11T18:00Z","Paycor Stadium","Sunday","18:00",NA
+"401030754",2018,10,"Cleveland Browns","Atlanta Falcons",28,16,"2018-11-11T18:00Z","Huntington Bank Field","Sunday","18:00",NA
+"401030821",2018,10,"Tennessee Titans","New England Patriots",34,10,"2018-11-11T18:00Z","Nissan Stadium","Sunday","18:00",NA
+"401030766",2018,10,"Indianapolis Colts","Jacksonville Jaguars",29,26,"2018-11-11T18:00Z","Lucas Oil Stadium","Sunday","18:00",NA
+"401030815",2018,10,"Kansas City Chiefs","Arizona Cardinals",26,14,"2018-11-11T18:00Z","GEHA Field at Arrowhead Stadium","Sunday","18:00",NA
+"401030853",2018,10,"New York Jets","Buffalo Bills",10,41,"2018-11-11T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030828",2018,10,"Tampa Bay Buccaneers","Washington Redskins",3,16,"2018-11-11T18:00Z","Raymond James Stadium","Sunday","18:00",NA
+"401030859",2018,10,"Oakland Raiders","Los Angeles Chargers",6,20,"2018-11-11T21:05Z","Oakland Coliseum","Sunday","21:05",NA
+"401030756",2018,10,"Green Bay Packers","Miami Dolphins",31,12,"2018-11-11T21:25Z","Lambeau Field","Sunday","21:25",NA
+"401030865",2018,10,"Los Angeles Rams","Seattle Seahawks",36,31,"2018-11-11T21:25Z","Los Angeles Memorial Coliseum","Sunday","21:25",NA
+"401030869",2018,10,"Philadelphia Eagles","Dallas Cowboys",20,27,"2018-11-12T01:20Z","Lincoln Financial Field","Monday","01:20",NA
+"401030873",2018,10,"San Francisco 49ers","New York Giants",23,27,"2018-11-13T01:15Z","Levi's Stadium","Tuesday","01:15",NA
+"401030878",2018,11,"Seattle Seahawks","Green Bay Packers",27,24,"2018-11-16T01:20Z","Lumen Field","Friday","01:20",NA
+"401030929",2018,11,"Atlanta Falcons","Dallas Cowboys",19,22,"2018-11-18T18:00Z","Mercedes-Benz Stadium","Sunday","18:00",NA
+"401030910",2018,11,"Detroit Lions","Carolina Panthers",20,19,"2018-11-18T18:00Z","Ford Field","Sunday","18:00",NA
+"401030922",2018,11,"Indianapolis Colts","Tennessee Titans",38,10,"2018-11-18T18:00Z","Lucas Oil Stadium","Sunday","18:00",NA
+"401030952",2018,11,"New York Giants","Tampa Bay Buccaneers",38,35,"2018-11-18T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030966",2018,11,"Washington Redskins","Houston Texans",21,23,"2018-11-18T18:00Z","Northwest Stadium","Sunday","18:00",NA
+"401030971",2018,11,"Jacksonville Jaguars","Pittsburgh Steelers",16,20,"2018-11-18T18:00Z","EverBank Stadium","Sunday","18:00",NA
+"401030894",2018,11,"Baltimore Ravens","Cincinnati Bengals",24,21,"2018-11-18T18:00Z","M&T Bank Stadium","Sunday","18:00",NA
+"401030970",2018,11,"Arizona Cardinals","Oakland Raiders",21,23,"2018-11-18T21:05Z","State Farm Stadium","Sunday","21:05",NA
+"401030969",2018,11,"Los Angeles Chargers","Denver Broncos",22,23,"2018-11-18T21:05Z","Dignity Health Sports Park","Sunday","21:05",NA
+"401030963",2018,11,"New Orleans Saints","Philadelphia Eagles",48,7,"2018-11-18T21:25Z","Caesars Superdome","Sunday","21:25",NA
+"401030903",2018,11,"Chicago Bears","Minnesota Vikings",25,20,"2018-11-19T01:20Z","Soldier Field","Monday","01:20",NA
+"401030972",2018,11,"Los Angeles Rams","Kansas City Chiefs",54,51,"2018-11-20T01:15Z","Los Angeles Memorial Coliseum","Tuesday","01:15",NA
+"401030905",2018,12,"Detroit Lions","Chicago Bears",16,23,"2018-11-22T17:30Z","Ford Field","Thursday","17:30",NA
+"401030925",2018,12,"Dallas Cowboys","Washington Redskins",31,23,"2018-11-22T21:30Z","AT&T Stadium","Thursday","21:30",NA
+"401030923",2018,12,"New Orleans Saints","Atlanta Falcons",31,17,"2018-11-23T01:20Z","Caesars Superdome","Friday","01:20",NA
+"401030919",2018,12,"Buffalo Bills","Jacksonville Jaguars",24,21,"2018-11-25T18:00Z","Highmark Stadium","Sunday","18:00",NA
+"401030921",2018,12,"Cincinnati Bengals","Cleveland Browns",20,35,"2018-11-25T18:00Z","Paycor Stadium","Sunday","18:00",NA
+"401030904",2018,12,"New York Jets","New England Patriots",13,27,"2018-11-25T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030914",2018,12,"Philadelphia Eagles","New York Giants",25,22,"2018-11-25T18:00Z","Lincoln Financial Field","Sunday","18:00",NA
+"401030902",2018,12,"Tampa Bay Buccaneers","San Francisco 49ers",27,9,"2018-11-25T18:00Z","Raymond James Stadium","Sunday","18:00",NA
+"401030920",2018,12,"Carolina Panthers","Seattle Seahawks",27,30,"2018-11-25T18:00Z","Bank of America Stadium","Sunday","18:00",NA
+"401030916",2018,12,"Baltimore Ravens","Oakland Raiders",34,17,"2018-11-25T18:00Z","M&T Bank Stadium","Sunday","18:00",NA
+"401030912",2018,12,"Los Angeles Chargers","Arizona Cardinals",45,10,"2018-11-25T21:05Z","Dignity Health Sports Park","Sunday","21:05",NA
+"401030911",2018,12,"Denver Broncos","Pittsburgh Steelers",24,17,"2018-11-25T21:25Z","Empower Field at Mile High","Sunday","21:25",NA
+"401030906",2018,12,"Indianapolis Colts","Miami Dolphins",27,24,"2018-11-25T21:25Z","Lucas Oil Stadium","Sunday","21:25",NA
+"401030908",2018,12,"Minnesota Vikings","Green Bay Packers",24,17,"2018-11-26T01:20Z","U.S. Bank Stadium","Monday","01:20",NA
+"401030762",2018,12,"Houston Texans","Tennessee Titans",34,17,"2018-11-27T01:15Z","NRG Stadium","Tuesday","01:15",NA
+"401030899",2018,13,"Dallas Cowboys","New Orleans Saints",13,10,"2018-11-30T01:20Z","AT&T Stadium","Friday","01:20",NA
+"401030928",2018,13,"Atlanta Falcons","Baltimore Ravens",16,26,"2018-12-02T18:00Z","Mercedes-Benz Stadium","Sunday","18:00",NA
+"401030955",2018,13,"Cincinnati Bengals","Denver Broncos",10,24,"2018-12-02T18:00Z","Paycor Stadium","Sunday","18:00",NA
+"401030957",2018,13,"Detroit Lions","Los Angeles Rams",16,30,"2018-12-02T18:00Z","Ford Field","Sunday","18:00",NA
+"401030965",2018,13,"Green Bay Packers","Arizona Cardinals",17,20,"2018-12-02T18:00Z","Lambeau Field","Sunday","18:00",NA
+"401030954",2018,13,"Miami Dolphins","Buffalo Bills",21,17,"2018-12-02T18:00Z","Hard Rock Stadium","Sunday","18:00",NA
+"401030953",2018,13,"New York Giants","Chicago Bears",30,27,"2018-12-02T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030968",2018,13,"Tampa Bay Buccaneers","Carolina Panthers",24,17,"2018-12-02T18:00Z","Raymond James Stadium","Sunday","18:00",NA
+"401030962",2018,13,"Jacksonville Jaguars","Indianapolis Colts",6,0,"2018-12-02T18:00Z","EverBank Stadium","Sunday","18:00",NA
+"401030964",2018,13,"Houston Texans","Cleveland Browns",29,13,"2018-12-02T18:00Z","NRG Stadium","Sunday","18:00",NA
+"401030960",2018,13,"Tennessee Titans","New York Jets",26,22,"2018-12-02T21:05Z","Nissan Stadium","Sunday","21:05",NA
+"401030935",2018,13,"Oakland Raiders","Kansas City Chiefs",33,40,"2018-12-02T21:05Z","Oakland Coliseum","Sunday","21:05",NA
+"401030959",2018,13,"New England Patriots","Minnesota Vikings",24,10,"2018-12-02T21:25Z","Gillette Stadium","Sunday","21:25",NA
+"401030958",2018,13,"Seattle Seahawks","San Francisco 49ers",43,16,"2018-12-02T21:25Z","Lumen Field","Sunday","21:25",NA
+"401030951",2018,13,"Pittsburgh Steelers","Los Angeles Chargers",30,33,"2018-12-03T01:20Z","Acrisure Stadium","Monday","01:20",NA
+"401030871",2018,13,"Philadelphia Eagles","Washington Redskins",28,13,"2018-12-04T01:15Z","Lincoln Financial Field","Tuesday","01:15",NA
+"401030724",2018,14,"Tennessee Titans","Jacksonville Jaguars",30,9,"2018-12-07T01:20Z","Nissan Stadium","Friday","01:20",NA
+"401030750",2018,14,"Buffalo Bills","New York Jets",23,27,"2018-12-09T18:00Z","Highmark Stadium","Sunday","18:00",NA
+"401030823",2018,14,"Cleveland Browns","Carolina Panthers",26,20,"2018-12-09T18:00Z","Huntington Bank Field","Sunday","18:00",NA
+"401030825",2018,14,"Green Bay Packers","Atlanta Falcons",34,20,"2018-12-09T18:00Z","Lambeau Field","Sunday","18:00",NA
+"401030764",2018,14,"Kansas City Chiefs","Baltimore Ravens",27,24,"2018-12-09T18:00Z","GEHA Field at Arrowhead Stadium","Sunday","18:00",NA
+"401030761",2018,14,"Miami Dolphins","New England Patriots",34,33,"2018-12-09T18:00Z","Hard Rock Stadium","Sunday","18:00",NA
+"401030758",2018,14,"Tampa Bay Buccaneers","New Orleans Saints",14,28,"2018-12-09T18:00Z","Raymond James Stadium","Sunday","18:00",NA
+"401030753",2018,14,"Washington Redskins","New York Giants",16,40,"2018-12-09T18:00Z","Northwest Stadium","Sunday","18:00",NA
+"401030813",2018,14,"Houston Texans","Indianapolis Colts",21,24,"2018-12-09T18:00Z","NRG Stadium","Sunday","18:00",NA
+"401030851",2018,14,"Los Angeles Chargers","Cincinnati Bengals",26,21,"2018-12-09T21:05Z","Dignity Health Sports Park","Sunday","21:05",NA
+"401030827",2018,14,"San Francisco 49ers","Denver Broncos",20,14,"2018-12-09T21:05Z","Levi's Stadium","Sunday","21:05",NA
+"401030854",2018,14,"Dallas Cowboys","Philadelphia Eagles",29,23,"2018-12-09T21:25Z","AT&T Stadium","Sunday","21:25",NA
+"401030863",2018,14,"Oakland Raiders","Pittsburgh Steelers",24,21,"2018-12-09T21:25Z","Oakland Coliseum","Sunday","21:25",NA
+"401030860",2018,14,"Arizona Cardinals","Detroit Lions",3,17,"2018-12-09T21:25Z","State Farm Stadium","Sunday","21:25",NA
+"401030817",2018,14,"Chicago Bears","Los Angeles Rams",15,6,"2018-12-10T01:20Z","Soldier Field","Monday","01:20",NA
+"401030867",2018,14,"Seattle Seahawks","Minnesota Vikings",21,7,"2018-12-11T01:15Z","Lumen Field","Tuesday","01:15",NA
+"401030874",2018,15,"Kansas City Chiefs","Los Angeles Chargers",28,29,"2018-12-14T01:20Z","GEHA Field at Arrowhead Stadium","Friday","01:20",NA
+"401030891",2018,15,"New York Jets","Houston Texans",22,29,"2018-12-15T21:30Z","MetLife Stadium","Saturday","21:30",NA
+"401030876",2018,15,"Denver Broncos","Cleveland Browns",16,17,"2018-12-16T01:20Z","Empower Field at Mile High","Sunday","01:20",NA
+"401030900",2018,15,"Atlanta Falcons","Arizona Cardinals",40,14,"2018-12-16T18:00Z","Mercedes-Benz Stadium","Sunday","18:00",NA
+"401030896",2018,15,"Buffalo Bills","Detroit Lions",14,13,"2018-12-16T18:00Z","Highmark Stadium","Sunday","18:00",NA
+"401030893",2018,15,"Chicago Bears","Green Bay Packers",24,17,"2018-12-16T18:00Z","Soldier Field","Sunday","18:00",NA
+"401030909",2018,15,"Cincinnati Bengals","Oakland Raiders",30,16,"2018-12-16T18:00Z","Paycor Stadium","Sunday","18:00",NA
+"401030927",2018,15,"Indianapolis Colts","Dallas Cowboys",23,0,"2018-12-16T18:00Z","Lucas Oil Stadium","Sunday","18:00",NA
+"401030918",2018,15,"Minnesota Vikings","Miami Dolphins",41,17,"2018-12-16T18:00Z","U.S. Bank Stadium","Sunday","18:00",NA
+"401030915",2018,15,"New York Giants","Tennessee Titans",0,17,"2018-12-16T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030924",2018,15,"Jacksonville Jaguars","Washington Redskins",13,16,"2018-12-16T18:00Z","EverBank Stadium","Sunday","18:00",NA
+"401030898",2018,15,"Baltimore Ravens","Tampa Bay Buccaneers",20,12,"2018-12-16T18:00Z","M&T Bank Stadium","Sunday","18:00",NA
+"401030950",2018,15,"San Francisco 49ers","Seattle Seahawks",26,23,"2018-12-16T21:05Z","Levi's Stadium","Sunday","21:05",NA
+"401030956",2018,15,"Pittsburgh Steelers","New England Patriots",17,10,"2018-12-16T21:25Z","Acrisure Stadium","Sunday","21:25",NA
+"401030961",2018,15,"Los Angeles Rams","Philadelphia Eagles",23,30,"2018-12-17T01:20Z","Los Angeles Memorial Coliseum","Monday","01:20",NA
+"401030967",2018,15,"Carolina Panthers","New Orleans Saints",9,12,"2018-12-18T01:15Z","Bank of America Stadium","Tuesday","01:15",NA
+"401030868",2018,16,"Tennessee Titans","Washington Redskins",25,16,"2018-12-22T21:30Z","Nissan Stadium","Saturday","21:30",NA
+"401030897",2018,16,"Los Angeles Chargers","Baltimore Ravens",10,22,"2018-12-23T01:20Z","Dignity Health Sports Park","Sunday","01:20",NA
+"401030872",2018,16,"Cleveland Browns","Cincinnati Bengals",26,18,"2018-12-23T18:00Z","Huntington Bank Field","Sunday","18:00",NA
+"401030875",2018,16,"Dallas Cowboys","Tampa Bay Buccaneers",27,20,"2018-12-23T18:00Z","AT&T Stadium","Sunday","18:00",NA
+"401030877",2018,16,"Detroit Lions","Minnesota Vikings",9,27,"2018-12-23T18:00Z","Ford Field","Sunday","18:00",NA
+"401030861",2018,16,"Indianapolis Colts","New York Giants",28,27,"2018-12-23T18:00Z","Lucas Oil Stadium","Sunday","18:00",NA
+"401030866",2018,16,"Miami Dolphins","Jacksonville Jaguars",7,17,"2018-12-23T18:00Z","Hard Rock Stadium","Sunday","18:00",NA
+"401030892",2018,16,"New England Patriots","Buffalo Bills",24,12,"2018-12-23T18:00Z","Gillette Stadium","Sunday","18:00",NA
+"401030870",2018,16,"New York Jets","Green Bay Packers",38,44,"2018-12-23T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030864",2018,16,"Philadelphia Eagles","Houston Texans",32,30,"2018-12-23T18:00Z","Lincoln Financial Field","Sunday","18:00",NA
+"401030895",2018,16,"Carolina Panthers","Atlanta Falcons",10,24,"2018-12-23T18:00Z","Bank of America Stadium","Sunday","18:00",NA
+"401030907",2018,16,"Arizona Cardinals","Los Angeles Rams",9,31,"2018-12-23T21:05Z","State Farm Stadium","Sunday","21:05",NA
+"401030901",2018,16,"San Francisco 49ers","Chicago Bears",9,14,"2018-12-23T21:05Z","Levi's Stadium","Sunday","21:05",NA
+"401030913",2018,16,"New Orleans Saints","Pittsburgh Steelers",31,28,"2018-12-23T21:25Z","Caesars Superdome","Sunday","21:25",NA
+"401030917",2018,16,"Seattle Seahawks","Kansas City Chiefs",38,31,"2018-12-24T01:20Z","Lumen Field","Monday","01:20",NA
+"401030926",2018,16,"Oakland Raiders","Denver Broncos",27,14,"2018-12-25T01:15Z","Oakland Coliseum","Tuesday","01:15",NA
+"401030722",2018,17,"Buffalo Bills","Miami Dolphins",42,17,"2018-12-30T18:00Z","Highmark Stadium","Sunday","18:00",NA
+"401030757",2018,17,"Green Bay Packers","Detroit Lions",0,31,"2018-12-30T18:00Z","Lambeau Field","Sunday","18:00",NA
+"401030765",2018,17,"New England Patriots","New York Jets",38,3,"2018-12-30T18:00Z","Gillette Stadium","Sunday","18:00",NA
+"401030768",2018,17,"New Orleans Saints","Carolina Panthers",14,33,"2018-12-30T18:00Z","Caesars Superdome","Sunday","18:00",NA
+"401030812",2018,17,"New York Giants","Dallas Cowboys",35,36,"2018-12-30T18:00Z","MetLife Stadium","Sunday","18:00",NA
+"401030820",2018,17,"Tampa Bay Buccaneers","Atlanta Falcons",32,34,"2018-12-30T18:00Z","Raymond James Stadium","Sunday","18:00",NA
+"401030759",2018,17,"Houston Texans","Jacksonville Jaguars",20,3,"2018-12-30T18:00Z","NRG Stadium","Sunday","18:00",NA
+"401030824",2018,17,"Denver Broncos","Los Angeles Chargers",9,23,"2018-12-30T21:25Z","Empower Field at Mile High","Sunday","21:25",NA
+"401030760",2018,17,"Kansas City Chiefs","Oakland Raiders",35,3,"2018-12-30T21:25Z","GEHA Field at Arrowhead Stadium","Sunday","21:25",NA
+"401030850",2018,17,"Los Angeles Rams","San Francisco 49ers",48,32,"2018-12-30T21:25Z","Los Angeles Memorial Coliseum","Sunday","21:25",NA
+"401030763",2018,17,"Minnesota Vikings","Chicago Bears",10,24,"2018-12-30T21:25Z","U.S. Bank Stadium","Sunday","21:25",NA
+"401030818",2018,17,"Pittsburgh Steelers","Cincinnati Bengals",16,13,"2018-12-30T21:25Z","Acrisure Stadium","Sunday","21:25",NA
+"401030856",2018,17,"Seattle Seahawks","Arizona Cardinals",27,24,"2018-12-30T21:25Z","Lumen Field","Sunday","21:25",NA
+"401030727",2018,17,"Washington Redskins","Philadelphia Eagles",0,24,"2018-12-30T21:25Z","Northwest Stadium","Sunday","21:25",NA
+"401030719",2018,17,"Baltimore Ravens","Cleveland Browns",26,24,"2018-12-30T21:25Z","M&T Bank Stadium","Sunday","21:25",NA
+"401030755",2018,17,"Tennessee Titans","Indianapolis Colts",17,33,"2018-12-31T01:20Z","Nissan Stadium","Monday","01:20",NA
+"401038952",2018,1,"Houston Texans","Indianapolis Colts",7,21,"2019-01-05T21:35Z","NRG Stadium","Saturday","21:35",NA
+"401038953",2018,1,"Dallas Cowboys","Seattle Seahawks",24,22,"2019-01-06T01:15Z","AT&T Stadium","Sunday","01:15",NA
+"401038955",2018,1,"Baltimore Ravens","Los Angeles Chargers",17,23,"2019-01-06T18:05Z","M&T Bank Stadium","Sunday","18:05",NA
+"401038954",2018,1,"Chicago Bears","Philadelphia Eagles",15,16,"2019-01-06T21:40Z","Soldier Field","Sunday","21:40",NA
+"401038957",2018,2,"Kansas City Chiefs","Indianapolis Colts",31,13,"2019-01-12T21:35Z","GEHA Field at Arrowhead Stadium","Saturday","21:35",NA
+"401038956",2018,2,"Los Angeles Rams","Dallas Cowboys",30,22,"2019-01-13T01:15Z","Los Angeles Memorial Coliseum","Sunday","01:15",NA
+"401038959",2018,2,"New England Patriots","Los Angeles Chargers",41,28,"2019-01-13T18:05Z","Gillette Stadium","Sunday","18:05",NA
+"401038958",2018,2,"New Orleans Saints","Philadelphia Eagles",20,14,"2019-01-13T21:40Z","Caesars Superdome","Sunday","21:40",NA
+"401038118",2018,3,"New Orleans Saints","Los Angeles Rams",23,26,"2019-01-20T20:05Z","Caesars Superdome","Sunday","20:05",NA
+"401038850",2018,3,"Kansas City Chiefs","New England Patriots",31,37,"2019-01-20T23:40Z","GEHA Field at Arrowhead Stadium","Sunday","23:40",NA
+"401038851",2018,4,"NFC All-Stars","AFC All-Stars",7,26,"2019-01-27T20:00Z","Camping World Stadium","Sunday","20:00",NA
+"401038115",2018,5,"Los Angeles Rams","New England Patriots",3,13,"2019-02-03T23:30Z","Mercedes-Benz Stadium","Sunday","23:30",NA
