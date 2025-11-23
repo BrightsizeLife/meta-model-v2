@@ -143,7 +143,7 @@ goal4/exploratory-data-analysis
 
 ## Associated PR
 
-(To be created)
+https://github.com/BrightsizeLife/meta-model-v2/pull/9
 
 ## SIGNAL BLOCKS
 
