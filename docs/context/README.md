@@ -2,73 +2,36 @@
 
 ## Overview
 
-The `docs/context/` directory manages runtime state for Multi-Agent Flow cycles. It contains the active cycle file, archives of completed cycles, and visual assets referenced during work.
+The `docs/context/` directory manages runtime state for Multi-Agent Flow. It contains the active goal cycle file, archives of completed goal cycles, and visual assets referenced during work.
+
+## Terminology
+
+- **Loop**: One iteration through Planner → Actor → Judge (returning back to Judge)
+- **Goal Cycle**: Complete workflow from goal definition through multiple loops to PR merge and branch deletion
+- **⚠️ CRITICAL - Each Goal Cycle** = **EXACTLY 1 Goal + 1 PR + 1 Branch** + Multiple Loops
+  - Never create multiple PRs or branches for a single goal cycle
+  - All loops contribute to the same PR and branch
 
 ## Files
 
 ### current_cycle.md
 
-**Purpose**: Active cycle tracking (append-only during cycle).
+**Purpose**: Active goal cycle tracking (append-only during cycle).
+
+**Template**: Use [`current_cycle_TEMPLATE.md`](current_cycle_TEMPLATE.md) to start each new goal cycle.
 
 **Lifecycle**:
-- **Initialized**: Human writes goal definition with SIGNAL BLOCK (Next: Planner)
-- **Updated**: Planner, Actor, and Judge append outputs (never edit earlier content)
-- **Archived**: Judge snapshots to archive after Human approves PASS result
-- **Cleared**: Human resets to empty state for next cycle
+- **Initialized**: Human writes goal definition with constraints, win-state, and expected loops using template
+- **Updated (per loop)**: Planner, Actor, and Judge append outputs (never edit earlier content)
+- **Archived**: Actor snapshots to archive after final branch deletion (goal cycle end)
+- **Cleared**: Human resets to empty state for next goal cycle
 
-**Schema**:
-```markdown
-# Current Cycle
-
-### SIGNAL BLOCK
-- Agent: Human
-- Result: INIT
-- Step Summary: [Goal description]
-- Next: Planner
-# Signature
-Project=multi-agent-flow | Agent=Human | Step=START
-
----
-
-## Iteration N
-
-### Planner Output
-[Planner response with clarifying questions or atomic step specification]
-
-### SIGNAL BLOCK
-- Agent: Planner
-- Result: PLAN_CREATED | PLAN_UPDATED
-- Step Summary: [Concise summary]
-- Next: Actor | Human
-# Signature
-Project=multi-agent-flow | Agent=Planner | Step=N
-
----
-
-### Actor Output
-[Actor execution results with unified diffs]
-
-### SIGNAL BLOCK
-- Agent: Actor
-- Result: SUCCESS | FAIL
-- Step Summary: [Concise summary]
-- Next: Judge | Planner
-# Signature
-Project=multi-agent-flow | Agent=Actor | Step=N
-
----
-
-### Judge Output
-[Judge evaluation with test results and diagnostics]
-
-### SIGNAL BLOCK
-- Agent: Judge
-- Result: PASS | INSUFFICIENT
-- Step Summary: [Concise summary]
-- Next: Human | Planner
-# Signature
-Project=multi-agent-flow | Agent=Judge | Step=N
-```
+**Schema**: See [`current_cycle_TEMPLATE.md`](current_cycle_TEMPLATE.md) for complete structure including:
+- Goal Definition (objective, constraints, win-state, expected loops)
+- PR and Branch tracking
+- Loop-by-loop progression
+- Enhanced SIGNAL BLOCKs with rich context
+- Final steps workflow (tests, merge, branch deletion)
 
 **Access**:
 - **Read**: All agents and Human
@@ -99,11 +62,22 @@ YYYY-MM-DD_cycle-NNN[_suffix].md
 - `_failed`: Critical error aborted cycle (e.g., Actor FAIL with blocker)
 
 ### Archiving Responsibility
-**Judge** performs archiving after Human approval:
-1. Judge receives Human approval on PASS result
-2. Judge snapshots `current_cycle.md` to `archive/YYYY-MM-DD_cycle-NNN.md`
-3. Judge notifies Human that archive is complete
-4. Human clears `current_cycle.md` for next goal
+**Actor** performs archiving at **goal cycle end** (not loop end):
+1. After Human approves merge, Actor merges PR
+2. Human reviews post-merge state
+3. Human approves branch deletion
+4. Actor deletes feature branch
+5. Actor archives `current_cycle.md` with one of these naming conventions:
+   - **Timestamp-based** (default): `archive/YYYYMMDD_HHMMSS_[description].md`
+   - **PR-based**: `archive/[PR-number]_[pr-title-slug].md`
+6. Actor creates fresh `current_cycle.md` from template for next goal cycle
+7. Actor notifies Human that archive is complete and new cycle is ready
+
+**Archive Naming Examples**:
+- `archive/20251119_143022_add-jwt-auth.md` (timestamp-based)
+- `archive/42_implement-user-authentication.md` (PR-based with PR #42)
+
+**Note**: Archiving happens at the end of the complete goal cycle (after branch deletion), not after individual loops.
 
 ### Retention
 - **Minimum**: 90 days (compliance requirement)
@@ -150,13 +124,31 @@ YYYY-MM-DD_HH-MM-SS_description.ext
 
 ## Snapshot Workflow
 
-### On Cycle Success (Judge PASS + Human Approval)
+### On Goal Cycle Success (Complete PR Lifecycle)
 ```bash
-# Judge executes after Human approves:
-cp docs/context/current_cycle.md docs/context/archive/2025-11-08_cycle-001.md
+# After all loops complete and Judge validates final state:
+# 1. Human approves merge
+# 2. Actor merges PR:
+gh pr merge [PR-number] --squash
 
-# Human then clears for next cycle:
-echo "" > docs/context/current_cycle.md
+# 3. Human reviews post-merge state
+# 4. Human approves branch deletion
+# 5. Actor deletes feature branch:
+git push origin --delete [branch-name]
+
+# 6. Actor archives the goal cycle with timestamp or PR-based naming:
+# Option A: Timestamp-based (YYYYMMDD_HHMMSS)
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+cp docs/context/current_cycle.md docs/context/archive/${TIMESTAMP}_add-jwt-auth.md
+
+# Option B: PR-based
+PR_NUM=42
+cp docs/context/current_cycle.md docs/context/archive/${PR_NUM}_implement-user-authentication.md
+
+# 7. Actor creates fresh current_cycle.md for next goal cycle:
+cp docs/context/current_cycle_TEMPLATE.md docs/context/current_cycle.md
+
+# 8. Actor notifies Human that archive is complete and new cycle ready
 ```
 
 ### On Cycle Pause (5 Consecutive Judge INSUFFICIENT)
@@ -244,13 +236,16 @@ ls docs/context/archive/*_incomplete.md | wc -l  # Paused
 6. **Track outcomes in DECISIONS.md** (link to archive for traceability)
 7. **Monitor the "Next" field** (determines which agent/Human should act)
 
-## Human Checkpoints in Lifecycle
+## Human Checkpoints in Goal Cycle Lifecycle
 
-1. **Cycle Start**: Human writes goal + SIGNAL BLOCK (Next: Planner)
-2. **Planner Q&A**: Human answers Planner's clarifying questions (if any)
-3. **Judge PASS**: Human reviews test results and approves/rejects commit/merge
-4. **Judge Pause** (5 INSUFFICIENT): Human reviews blockers and decides next steps
-5. **Cycle Reset**: Human clears current_cycle.md after Judge archives
+1. **Goal Cycle Start**: Human writes goal with constraints, win-state, expected loops, PR/branch info
+2. **Planner Q&A** (per loop): Human answers Planner's clarifying questions to align on subordinate goals
+3. **Judge PASS Review** (per loop): Human reviews loop test results and provides feedback
+4. **Judge Pause** (after 5 INSUFFICIENT loops): Human reviews blockers and decides next steps
+5. **Final Merge Approval**: Human approves PR merge after all loops complete and win-state achieved
+6. **Post-Merge Review**: Human verifies merged changes in main branch
+7. **Branch Deletion Approval**: Human approves deletion of feature branch
+8. **Goal Cycle Reset**: Human clears current_cycle.md after Actor archives
 
 ## See Also
 
