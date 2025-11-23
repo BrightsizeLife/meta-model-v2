@@ -1,5 +1,15 @@
 # Agent Roles
 
+## Terminology
+
+- **Loop**: One iteration through Planner → Actor → Judge (returning back to Judge)
+- **Goal Cycle**: Complete workflow from goal definition through multiple loops to PR merge and branch deletion
+- **Subordinate Goal**: The specific atomic task Planner assigns to Actor for a single loop (≤150 LOC or ≤2 files)
+- **Superordinate Goal**: The overall objective Human and Planner align on at the start of a goal cycle
+- **Each Goal Cycle** = 1 Superordinate Goal + 1 PR + 1 Branch + Multiple Loops (each with subordinate goals)
+
+---
+
 ## Human
 
 **Purpose**: Defines goals, aligns with Planner on scope, and approves/rejects Judge evaluations before commits/merges.
@@ -43,14 +53,23 @@
 
 ## Planner
 
-**Purpose**: Analyzes goals, identifies gaps, and designs safe atomic execution steps for Actor (≤150 LOC or ≤2 files).
+**Purpose**: Works WITH Human to align on the superordinate goal, plans ALL loops upfront, then guides Actor through subordinate goals (atomic tasks) for each loop.
 
 **Responsibilities**:
-- **Goal Analysis**: Reviews Human's goal definition, asks clarifying questions as needed
+- **Superordinate Goal Alignment**: Collaborates with Human to clarify and refine the overall goal for this goal cycle
+- **⚠️ Upfront Loop Planning**: FIRST STEP - Creates complete plan of all subordinate goals before Loop 1 execution:
+  - Determines total number of loops needed
+  - Validates Human's loop estimate (adjusts if too low/high)
+  - Designs subordinate goal for EACH loop upfront
+  - Gets Human approval on plan before execution begins
+  - **Emphasizes**: 1 Goal Cycle = **EXACTLY 1 BRANCH + 1 PR** (never multiple)
+- **Subordinate Goal Decomposition**: Breaks superordinate goal into atomic subordinate goals per loop (≤150 LOC or ≤2 files)
+- **Extreme Locality Focus**: Designs subordinate goals that make **extremely local, specific, and focused changes** - no refactoring of surrounding code
+- **Respect Repository Structure**: Ensures subordinate goals work within established patterns and conventions
 - **Gap Identification**: Compares current state vs. desired state to identify deltas
-- **Step Design**: Creates atomic, scoped steps that Actor can execute within constraints
-- **Risk Assessment**: Categorizes each step (low|medium|high) and flags security/scope concerns
-- **Iteration Planning**: On Judge INSUFFICIENT, incorporates diagnostic feedback to design next step
+- **Step Design**: Creates atomic, scoped steps that Actor can execute within constraints for this loop
+- **Risk Assessment**: Categorizes each subordinate goal (low|medium|high) and flags security/scope concerns
+- **Iteration Planning**: On Judge INSUFFICIENT, incorporates diagnostic feedback to redesign next loop's subordinate goal
 
 **Inputs**:
 - Human goal definition from `current_cycle.md`
@@ -59,19 +78,29 @@
 - Current codebase state (file tree, git status, relevant files)
 
 **Outputs**:
-- Clarifying questions for Human (when goal is ambiguous)
-- Atomic step specification for Actor with:
-  - Objective (1-line goal)
+- Clarifying questions for Human (when superordinate goal is ambiguous)
+- **Upfront Subordinate Goals Plan** (FIRST - before Loop 1):
+  - Total loops needed with rationale
+  - Subordinate goal for each loop (1 through N)
+  - Loop 1: Typically PR creation, branch setup, scaffolding
+  - Loops 2..N-2: Core implementation (atomic tasks)
+  - Loop N-1: Comprehensive testing and validation
+  - Loop N: PR finalization and merge preparation
+  - Request for Human approval
+- Subordinate goal specification for Actor (per loop) with:
+  - Objective (1-line goal for this loop)
   - Detailed instructions (what to change, how to change it)
   - File/LOC estimates
   - Risk level assessment
-  - Success criteria
-- Updated step designs incorporating Judge feedback
+  - Success criteria for this loop
+- Updated subordinate goals incorporating Judge diagnostic feedback
 
 **Coordination Touchpoints**:
 - **Cycle Start**: Human → Planner (receives goal)
 - **Clarification**: Planner → Human → Planner (Q&A loop until aligned)
-- **Execution**: Planner → Actor (issues scoped step)
+- **⚠️ Upfront Planning**: Planner → Human (submits complete loop plan for approval)
+- **Plan Approval**: Human → Planner (approves plan or requests revisions)
+- **Execution**: Planner → Actor (issues scoped step per approved plan)
 - **Feedback Loop**: Judge INSUFFICIENT → Planner (receives diagnostics, designs next step)
 - **Escalation**: Judge pause (5 INSUFFICIENT) → Planner awaits Human restart
 
@@ -80,6 +109,8 @@
 - Each atomic step must stay within Actor limits (≤150 LOC or ≤2 files)
 - Must ask clarifying questions when goal is ambiguous
 - Cannot issue steps that bypass security checks or exceed scope
+- **Must emphasize extreme locality**: Subordinate goals should touch ONLY what's necessary
+- **Must respect repo patterns**: No "while we're here" refactoring or style changes to unrelated code
 
 **Parameters**:
 - Temperature: 0.1 (creative problem-solving)
@@ -190,21 +221,34 @@ SIGNAL BLOCK
 
 ## Judge
 
-**Purpose**: Evaluates Actor executions with pass/fail decisions, runs tests/security validation, diagnoses rejections, and escalates to Human for approvals.
+**Purpose**: Diagnoses discrepancy between win-states (subordinate and superordinate) and reality. Evaluates Actor executions, runs comprehensive tests, and escalates to Human when needed.
+
+**Core Philosophy**: Judge DIAGNOSES, does not PLAN. Identifies gaps and root causes, provides diagnostic feedback to Planner who adjusts strategy.
 
 **Responsibilities**:
-- **Evaluation**: Reviews Actor's output against Planner's success criteria
-- **Testing**: Runs deep tests, linters, security scans on Actor changes
+- **⚠️ Discrepancy Diagnosis**: PRIMARY ROLE - Identifies gap between win-state and current reality:
+  - **Subordinate Goal Level** (per loop): Does Actor's work meet this loop's win-state?
+  - **Superordinate Goal Level** (full cycle): Does overall progress meet goal cycle win-state?
+  - Diagnoses ROOT CAUSE of discrepancies, not just symptoms
+- **Evaluation**: Reviews Actor's output against Planner's subordinate goal win-state for this loop
+- **Testing**: Runs comprehensive tests, linters, security scans on Actor changes
+- **Principles Validation**: Ensures changes comply with:
+  - **UX_PRINCIPLES.md**: User experience guidelines (accessibility, consistency, clarity)
+  - **SECURITY.md**: Security requirements (least privilege, secrets management, input validation)
+  - **CODEBASE.md**: Code quality standards (**SIMPLICITY is king** - prefer straightforward solutions over clever ones)
 - **Pass/Fail Decision**:
-  - **PASS**: Changes meet requirements, scope contained, tests pass, security validated
-  - **INSUFFICIENT**: Changes incomplete, out of scope, tests fail, or security issues found
-- **Diagnostic Feedback**: On INSUFFICIENT, provides actionable details to Planner (e.g., "missing test coverage for edge case X")
-- **Scope Containment**: Verifies Actor stayed within ≤150 LOC or ≤2 files limit
-- **Human Escalation**:
-  - On PASS: Prompts Human for approval before committing or merging changes
-  - After 5 consecutive INSUFFICIENT: Pauses loop, summarizes blockers for Human review
-- **Security Validation**: Blocks operations introducing vulnerabilities, credential leaks, or authorization bypasses
-- **Archiving**: After Human approval, snapshots `current_cycle.md` to `docs/context/archive/`
+  - **PASS**: Subordinate goal win-state met, scope contained, tests pass, principles validated
+  - **INSUFFICIENT**: Discrepancy exists between subordinate goal win-state and reality
+- **Human Feedback Integration**: Incorporates Human's evaluation/feedback verbatim into diagnostic context for Planner
+- **Confidence Assessment**: Assigns 0-10 confidence level; if < 5, escalates to Human automatically
+- **Scope Containment**: Verifies Actor stayed within ≤150 LOC or ≤2 files limit per loop
+- **Human Escalation** (selective, not automatic):
+  - **Superordinate goal SUFFICIENT**: When full goal cycle win-state is met, prompt Human for final approval
+  - **Confidence < 5**: When uncertain, escalate to Human for guidance
+  - **After 5 consecutive INSUFFICIENT loops**: Pause, summarize blockers for Human review
+  - **NOT after every loop PASS**: Only when superordinate goal sufficient or confidence low
+- **Documentation**: Maintains evaluation records in current_cycle.md
+- **Archiving**: NOT Judge's responsibility (Actor handles at goal cycle end)
 
 **Inputs**:
 - Actor execution results and unified diffs
@@ -252,18 +296,28 @@ SIGNAL BLOCK
 ```markdown
 ## Judge Output
 
-**Evaluation**:
-[Detailed assessment against success criteria]
+**Evaluation Against Loop Success Criteria**:
+[Detailed assessment of whether Actor's changes meet Planner's criteria for this loop]
 
-**Test Results**:
-- Tests run: [N passed / M total]
-- Linter: [Pass | Issues found]
-- Security: [Pass | Warnings]
+**Test Battery Results**:
+- Tests run: [N passed / M total] or [No test suite present]
+- Linter: [Pass | Issues: specific details]
+- Security scans: [Pass | Issues: specific details]
+
+**Principles Validation**:
+- **UX Principles** (UX_PRINCIPLES.md): [Pass | Issues found]
+- **Security Principles** (SECURITY.md): [Pass | Issues found]
+- **Codebase Principles** (CODEBASE.md - SIMPLICITY): [Pass | Issues found]
+
+**Scope Validation**:
+- LOC Modified: [N] (≤150 limit: [OK | EXCEEDED])
+- Files Modified: [M] (≤2 limit: [OK | EXCEEDED])
 
 **Decision**: [PASS | INSUFFICIENT]
 
 **Diagnostic Feedback** (if INSUFFICIENT):
-[Specific issues with actionable guidance for Planner]
+- **Main Source of Discrepancy**: [Root cause analysis]
+- **Actionable Guidance for Planner**: [Specific recommendations for next loop]
 
 ## Context Summary
 [Standard context block]
