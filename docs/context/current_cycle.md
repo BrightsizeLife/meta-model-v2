@@ -2,7 +2,7 @@
 
 ## Objective
 
-Conduct comprehensive exploratory data analysis of NFL game statistics to understand data distributions, relationships, temporal patterns, and identify insights that will inform predictive modeling.
+Conduct comprehensive exploratory data analysis of NFL game statistics to understand data distributions, identify potential data quality issues for ML modeling (specifically XGBoost), and explore relationships between variables. Focus on univariate distributions, bivariate relationships, context-conditioned analyses (season, week, game time, home/away), and light inferential checks. All outputs written to reports/eda/ and documented in README.
 
 ## Constraints
 
@@ -17,36 +17,44 @@ Conduct comprehensive exploratory data analysis of NFL game statistics to unders
 
 This goal cycle is complete when:
 
-✓ **Descriptive Statistics** generated for all key variables
-  - Summary statistics (mean, median, SD, range) for all numeric variables
-  - Frequency distributions for categorical variables
-  - Missing data analysis documented
+✓ **Univariate Analyses** completed for all key measures:
+  - Passing yards, rushing yards, passing/rushing ratio
+  - Points scored, points allowed
+  - Turnovers, sacks, penalties
+  - Field goals made, third-down conversions, fourth-down conversions
+  - Explosiveness metrics (long run/long reception)
+  - Outputs: Histograms, density plots, boxplots, summary tables (mean, SD, median, quantiles)
+  - Outlier detection using IQR rule with extreme values highlighted
+  - **Data quality issues identified** for ML modeling
 
-✓ **Univariate Analysis** completed
-  - Distributions visualized for key offensive/defensive stats
-  - Outliers identified and documented
-  - Temporal trends by week/season explored
+✓ **Bivariate Analyses** completed for key relationships:
+  - Passing yards ~ Rushing yards
+  - Points scored ~ Passing yards, Rushing yards, Turnovers
+  - Points allowed ~ Turnovers
+  - Penalties ~ Points scored
+  - Sacks ~ Passing efficiency
+  - Home offense stats ~ Away defense stats (per matchup)
+  - Away offense stats ~ Home defense stats
+  - Outputs: Scatterplots with smoothing (loess/linear), scatterplot matrices, correlation matrix, ranked correlation tables
 
-✓ **Bivariate Analysis** completed
-  - Correlations between offensive and defensive stats
-  - Score relationships with key stats
-  - Home vs away performance comparisons
+✓ **Context-Conditioned Analyses** completed:
+  - By Season (2022-2025): distribution comparisons
+  - By Week: weekly trend lines, early vs late season patterns
+  - By Game Time: early/afternoon/night comparisons
+  - By Home vs Away: offensive/defensive distributions, home field effects
+  - Outputs: Faceted bar/box/density plots, season-week heatmaps, rolling averages
 
-✓ **Temporal Analysis** completed
-  - Week-of-season effects on performance
-  - Season-over-season trends (2022-2025)
-  - Last-met-date impact on performance
+✓ **Light Inferential Checks** (exploratory only, not modeling):
+  - Home-field advantage test (t-test or nonparametric)
+  - Passing vs rushing balance influence on scoring
+  - Turnovers impact on win probability
+  - Penalties vs scoring efficiency
+  - Seasonal effects (ANOVA or Kruskal-Wallis)
 
-✓ **Statistical Inference** conducted
-  - Hypothesis tests for key relationships (e.g., week effects, home advantage)
-  - Effect sizes calculated and interpreted
-  - Confidence intervals for key estimates
-
-✓ **Documentation** complete
-  - EDA report with findings (reports/eda/)
-  - Key insights summarized in README
-  - Reproducible analysis scripts
-  - Recency features (time since last meeting, prior meeting scores where available) described and used in analysis
+✓ **Documentation** complete:
+  - All outputs in reports/eda/
+  - README updated with analysis approach, key findings, data quality issues
+  - Rerun/append instructions documented
 
 ✓ Judge gives final PASS and Human approves merge
 
@@ -56,68 +64,75 @@ This goal cycle is complete when:
 
 ## Subordinate Goals Plan
 
-**Superordinate Goal:** Understand the NFL game statistics dataset in detail through comprehensive exploratory analysis
+**Superordinate Goal:** Understand NFL game statistics in detail, identify data quality issues for ML modeling, and explore relationships to inform predictive models
 
-**Loop 1 - Data Loading, Missingness, Descriptive Stats**
-- **Subordinate Goal**: Load games_full.csv (or join game_results.csv + game_stats.csv) and generate descriptive statistics with missingness, derived recency features (time since last meeting), and distribution overviews.
-- **Deliverables**: R script for descriptive stats; markdown report with key metrics, missingness tables, and recency/last-meeting score notes where data allows.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Summary stats for scores and key offensive/defensive fields; missingness tables; basic frequency tables (teams); temporal coverage by season/week documented; derived `days_since_last_met` and last-meeting score fields computed where data exists (or clearly noted if unavailable).
+**Loop 1 - Data Load, Descriptive Statistics & Data Quality Assessment** ✓ COMPLETE
+- **Subordinate Goal**: Load games_full.csv (with fallback), generate comprehensive descriptive statistics, assess missing data, identify data quality issues
+- **Deliverables**: R script + markdown report with summary stats, distributions, data quality notes
+- **LOC**: 165 | **Files**: 2 (01_descriptive_stats.R, 01_descriptive_stats.md)
+- **Success Criteria**: ✓ Missingness documented, ✓ Summary stats for all variables, ✓ Initial distributions visualized, ✓ Data fallback implemented
+- **Status**: COMPLETE (Judge PASS)
 
-**Loop 2 - Univariate Analysis: Offensive Stats**
-- **Subordinate Goal**: Analyze distributions of offensive statistics (passing, rushing, turnovers) with standardized plots (e.g., z-scores) to compare across metrics.
-- **Deliverables**: Visualizations (histograms/density, boxplots), outlier detection notes.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Distribution plots for key offensive stats, outliers flagged, standardized views to compare across stats.
+**Loop 2 - Univariate Analysis: Offensive Metrics**
+- **Subordinate Goal**: Analyze distributions of key offensive metrics with focus on identifying ML modeling issues (outliers, skewness, data quality)
+- **Measures**: Passing yards, rushing yards, passing/rushing ratio, passing TDs, rushing TDs, turnovers, field goals, third/fourth down conversions, explosiveness (long pass/run)
+- **Deliverables**: Script + markdown with histograms, density plots, boxplots, summary tables, outlier detection (IQR), data quality flags
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: All offensive metrics analyzed, outliers identified, distributions visualized, summary tables generated, data quality issues documented
 
-**Loop 3 - Univariate Analysis: Defensive Stats**
-- **Subordinate Goal**: Analyze distributions of defensive statistics (sacks, interceptions, yards allowed) with standardized visualizations.
-- **Deliverables**: Visualizations (histograms/density, boxplots), comparisons to offensive patterns.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Distribution plots for key defensive stats, standardized comparison views.
+**Loop 3 - Univariate Analysis: Defensive & Special Teams Metrics**
+- **Subordinate Goal**: Analyze distributions of defensive and special teams metrics with outlier detection
+- **Measures**: Points allowed, sacks made, interceptions, fumbles forced, QB hits, tackles for loss, penalties, penalty yards
+- **Deliverables**: Script + markdown with histograms, density plots, boxplots, summary tables, outlier detection
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: All defensive metrics analyzed, outliers identified, distributions visualized, data quality issues noted
 
-**Loop 4 - Bivariate Analysis: Stats vs Scores**
-- **Subordinate Goal**: Explore relationships between key stats and scores (home/away), focusing on standardized comparisons.
-- **Deliverables**: Correlation matrices, scatter/LOESS plots, quick regression diagnostics.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Correlation heatmap; scatter plots of top predictors vs scores; notes on effect direction/strength.
+**Loop 4 - Bivariate Analysis: Offensive Relationships**
+- **Subordinate Goal**: Explore core offensive relationships and correlations
+- **Analyses**: Passing yards ~ Rushing yards, Points scored ~ Passing yards, Points scored ~ Rushing yards, Points scored ~ Turnovers, Sacks ~ Passing efficiency
+- **Deliverables**: Script + markdown with scatterplots (loess smoothing), correlation matrix, ranked correlation tables
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: Scatterplots with trendlines, correlation matrix heatmap, top correlations identified, relationships documented
 
-**Loop 5 - Bivariate Analysis: Home vs Away**
-- **Subordinate Goal**: Compare home vs away metrics, using standardized scales to overlay distributions.
-- **Deliverables**: Comparative visualizations, simple tests for differences.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Home advantage quantified; standardized overlays for key stats.
+**Loop 5 - Bivariate Analysis: Offensive vs Defensive Matchups**
+- **Subordinate Goal**: Analyze matchup-level relationships between offense and defense
+- **Analyses**: Home offense ~ Away defense, Away offense ~ Home defense, Points allowed ~ Turnovers, Penalties ~ Points scored, scatterplot matrix for core variables
+- **Deliverables**: Script + markdown with matchup scatterplots, scatterplot matrices, relationship summaries
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: Matchup relationships visualized, scatterplot matrices generated, patterns documented
 
-**Loop 6 - Temporal Analysis: Week Effects**
-- **Subordinate Goal**: Analyze performance changes across weeks; standardized week-level plots.
-- **Deliverables**: Time series/line plots, week-effect tests.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Week trends visualized; week effect tests noted.
+**Loop 6 - Context-Conditioned Analysis: Temporal & Environmental**
+- **Subordinate Goal**: Analyze how distributions and relationships vary by season, week, and game time
+- **Analyses**: Season comparisons (2022-2025), weekly trends, early vs late season patterns, game time effects (early/afternoon/night if available)
+- **Deliverables**: Script + markdown with faceted plots, season-week heatmaps, rolling averages, trend lines
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: Temporal patterns visualized, seasonal effects documented, weekly trends identified
 
-**Loop 7 - Temporal Analysis: Season Trends**
-- **Subordinate Goal**: Examine season-over-season changes (2022–2025) with standardized comparisons.
-- **Deliverables**: Season comparison plots, trend notes.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Season trends identified; standardized season overlays.
+**Loop 7 - Context-Conditioned Analysis: Home vs Away Effects**
+- **Subordinate Goal**: Quantify home field advantage across all metrics
+- **Analyses**: Home vs away distributions for all key metrics, home offense vs away offense, home defense vs away defense, home effects on turnovers and scoring
+- **Deliverables**: Script + markdown with faceted box/density plots, comparative summaries, home advantage quantification
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: Home field effects quantified, distributions compared, patterns documented
 
-**Loop 8 - Statistical Inference & Hypothesis Testing**
-- **Subordinate Goal**: Conduct formal tests for key relationships (week effects, home advantage, score drivers).
-- **Deliverables**: Tests, effect sizes, confidence intervals.
-- **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Key hypotheses tested; effect sizes and CIs reported.
+**Loop 8 - Light Inferential Checks (Exploratory, Not Modeling)**
+- **Subordinate Goal**: Conduct quick statistical tests to validate patterns (inform modeling, not replace it)
+- **Analyses**: Home-field advantage test (t-test), passing vs rushing balance correlation, turnovers impact (logistic regression), penalties vs efficiency, seasonal effects (ANOVA/Kruskal-Wallis)
+- **Deliverables**: Script + markdown with test results, effect sizes, confidence intervals, bootstrapped CIs where appropriate
+- **Estimated LOC**: ~145 | **Files**: ≤2
+- **Success Criteria**: Key hypotheses tested, effect sizes calculated, patterns validated, statistical summaries documented
 
-**Loop 9 - EDA Report & Key Findings**
-- **Subordinate Goal**: Synthesize findings into comprehensive EDA report
-- **Deliverables**: Markdown report with visualizations and insights
-- **Estimated LOC**: Report + ≤2 files
-- **Files**: ≤2
-- **Success Criteria**: Clear report documenting all analyses, key insights highlighted
+**Loop 9 - Comprehensive EDA Report & Data Quality Summary**
+- **Subordinate Goal**: Synthesize all findings into comprehensive report highlighting data quality issues for ML
+- **Deliverables**: Final EDA markdown report with key findings, data quality issues, recommendations for modeling
+- **Estimated LOC**: ~120 | **Files**: ≤2
+- **Success Criteria**: All analyses summarized, data quality issues highlighted, ML modeling recommendations provided
 
 **Loop 10 - Documentation & PR Finalization**
-- **Subordinate Goal**: Update README with analysis overview, finalize documentation
-- **Deliverables**: README updates, PR description
-- **Estimated LOC**: ≤120 | **Files**: ≤2
-- **Success Criteria**: README explains analysis approach, PR ready for review
+- **Subordinate Goal**: Update README with complete EDA documentation and finalize PR
+- **Deliverables**: README updates with analysis approach, key findings, rerun instructions, PR description
+- **Estimated LOC**: ~100 | **Files**: ≤2
+- **Success Criteria**: README comprehensive, all analyses documented, PR ready for review
 
 ## Branch
 
@@ -128,6 +143,95 @@ goal4/exploratory-data-analysis
 https://github.com/BrightsizeLife/meta-model-v2/pull/9
 
 ## SIGNAL BLOCKS
+
+### SIGNAL BLOCK — EDA Framework Aligned (Actor)
+
+**Agent**: Actor
+
+**Result**: PLAN_ALIGNED
+
+**Summary**: Updated Goal 4 plan with comprehensive EDA framework aligned with Human's detailed requirements. Restructured subordinate goals to focus on data quality issues for ML modeling (XGBoost), incorporated specific univariate/bivariate/context-conditioned analyses, and defined clear deliverables for each loop.
+
+**Confidence**: 9
+
+**Next**: Actor (proceed with Loop 2)
+
+**Context**:
+
+**Planning Updates Made:**
+1. ✓ Updated Objective to emphasize data quality issues for ML modeling
+2. ✓ Expanded Win-State with comprehensive analysis requirements:
+   - Univariate: 13 specific measures (passing, rushing, scoring, turnovers, efficiency metrics)
+   - Bivariate: 9 specific relationships with correlation matrices
+   - Context-Conditioned: Season, week, game time, home/away breakdowns
+   - Light Inferential: 5 statistical tests (exploratory, not modeling)
+3. ✓ Restructured Subordinate Goals (Loops 1-10):
+   - Loop 1: COMPLETE (descriptive stats & data quality)
+   - Loop 2: Univariate offensive metrics with ML issue detection
+   - Loop 3: Univariate defensive/special teams metrics
+   - Loop 4: Bivariate offensive relationships
+   - Loop 5: Bivariate matchup analysis (offense vs defense)
+   - Loop 6: Temporal/environmental context analysis
+   - Loop 7: Home vs away effects quantification
+   - Loop 8: Light inferential checks
+   - Loop 9: Comprehensive EDA report with data quality summary
+   - Loop 10: Documentation & PR finalization
+
+**Key Focus Areas (per Human guidance):**
+- **Data Quality for ML**: Identify outliers, skewness, data issues that will hurt XGBoost models
+- **Specific Measures**: All offensive, defensive, efficiency, and explosiveness metrics
+- **Relationships**: Core bivariate relationships + matchup-level offense vs defense
+- **Context**: Season, week, game time, home/away breakdowns
+- **Visualizations**: Histograms, density, boxplots, scatterplots, correlation matrices, faceted plots, heatmaps
+- **Statistical Validation**: Light inferential checks (t-tests, ANOVA, simple logistic regression)
+
+**Deliverable Structure (each loop):**
+- Single R script (≤150 LOC)
+- Markdown report with embedded visualizations
+- Data quality flags and ML modeling notes
+- All outputs to reports/eda/
+
+**Ready to Proceed:**
+Loop 1 complete (Judge PASS). Ready to start Loop 2: Univariate Analysis of Offensive Metrics with focus on:
+- Passing yards, rushing yards, passing/rushing ratio
+- Passing/rushing TDs, turnovers
+- Field goals, third/fourth down conversions
+- Explosiveness metrics (long pass/run)
+- Outlier detection (IQR)
+- Data quality flags for ML
+
+**Signature**: 4.4.2
+
+---
+
+### SIGNAL BLOCK
+- Agent: Planner
+- Result: PLAN_UPDATED
+- Step Summary: Goal 4 updated with defined univariate, bivariate, and context-conditioned EDA scope.
+- Next: Actor
+# Signature
+Project=meta-model-v2 | Agent=Planner | Step=goal_4.update
+
+### SIGNAL BLOCK — Loop 1 Fixed Judge Review (Goal 4)
+
+- Agent: Judge
+- Result: PASS
+- Loop Summary: Loop 1 corrected — possession_seconds removed, EDA rebuilt with fallback, working plots, markdown report, 2-file scope enforced.
+- Confidence: 9
+- Next: Planner
+- Context:
+  - **Subordinate Goal Status**: MET
+    - Data: possession_seconds removed; schema now 70 stats (game_stats 78 cols; games_full 82 cols).
+    - EDA: `reports/eda/01_descriptive_stats.R` (165 LOC) with fallback (games_full or join game_results + game_stats); outputs `01_descriptive_stats.md` + 3 populated plots.
+    - Cleanup: Removed prior TXT and Loop 2 artifacts; file scope respected (script + markdown; plots referenced).
+  - **Notes**: Script slightly over 150 LOC (165); acceptable given fixes, but Planner may trim if needed in next loop.
+  - **Human Feedback**: Blank-plot issue resolved; visuals now show data.
+- Test Summary: Not run (EDA only).
+- Issues Found: 0 for this loop.
+
+**Signature**: 4:3:3
+
+---
 
 ### SIGNAL BLOCK — Loop 1 Fixed (Actor)
 
