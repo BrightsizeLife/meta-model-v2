@@ -8,14 +8,14 @@ suppressPackageStartupMessages({
   library(readr)
 })
 
-# 72 stat columns in schema order
+# 70 stat columns in schema order (removed time_of_possession_seconds - all zeros)
 STAT_COLS <- c(
   paste0("home_", c("passing_yards", "passing_touchdowns", "passing_first_downs",
     "passing_interceptions_thrown", "passing_long", "rushing_yards", "rushing_touchdowns",
     "rushing_first_downs", "rushing_long", "fumbles", "fumbles_lost", "turnovers",
     "third_down_conversions", "third_down_attempts", "fourth_down_conversions",
     "fourth_down_attempts", "penalties", "penalty_yards", "sacks_taken", "sack_yards_lost",
-    "time_of_possession_seconds", "field_goals_made", "field_goals_attempted", "field_goal_longest",
+    "field_goals_made", "field_goals_attempted", "field_goal_longest",
     "passing_yards_allowed", "passing_touchdowns_allowed", "rushing_yards_allowed",
     "rushing_touchdowns_allowed", "turnovers_forced", "interceptions_made", "fumbles_forced",
     "sacks_made", "sack_yards", "qb_hits", "tackles_for_loss", "passes_defended")),
@@ -24,7 +24,7 @@ STAT_COLS <- c(
     "rushing_first_downs", "rushing_long", "fumbles", "fumbles_lost", "turnovers",
     "third_down_conversions", "third_down_attempts", "fourth_down_conversions",
     "fourth_down_attempts", "penalties", "penalty_yards", "sacks_taken", "sack_yards_lost",
-    "time_of_possession_seconds", "field_goals_made", "field_goals_attempted", "field_goal_longest",
+    "field_goals_made", "field_goals_attempted", "field_goal_longest",
     "passing_yards_allowed", "passing_touchdowns_allowed", "rushing_yards_allowed",
     "rushing_touchdowns_allowed", "turnovers_forced", "interceptions_made", "fumbles_forced",
     "sacks_made", "sack_yards", "qb_hits", "tackles_for_loss", "passes_defended"))
@@ -129,4 +129,4 @@ if (!dir.exists(out_dir)) {
 
 write_csv(combined, out_path)
 cat(sprintf("\n✓ Processed %d games → %s\n", nrow(combined), out_path))
-cat(sprintf("✓ Schema: 5 identifiers + 2 scores + 72 stats + 1 last_met_date = 80 columns\n"))
+cat(sprintf("✓ Schema: 5 identifiers + 2 scores + 70 stats + 1 last_met_date = 78 columns\n"))

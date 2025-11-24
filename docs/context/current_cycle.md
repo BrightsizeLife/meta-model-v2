@@ -46,6 +46,7 @@ This goal cycle is complete when:
   - EDA report with findings (reports/eda/)
   - Key insights summarized in README
   - Reproducible analysis scripts
+  - Recency features (time since last meeting, prior meeting scores where available) described and used in analysis
 
 ✓ Judge gives final PASS and Human approves merge
 
@@ -58,10 +59,10 @@ This goal cycle is complete when:
 **Superordinate Goal:** Understand the NFL game statistics dataset in detail through comprehensive exploratory analysis
 
 **Loop 1 - Data Loading, Missingness, Descriptive Stats**
-- **Subordinate Goal**: Load games_full.csv (or join game_results.csv + game_stats.csv) and generate descriptive statistics with missingness analysis and distribution overviews.
-- **Deliverables**: R script for descriptive stats; markdown report with key metrics and missingness tables.
+- **Subordinate Goal**: Load games_full.csv (or join game_results.csv + game_stats.csv) and generate descriptive statistics with missingness, derived recency features (time since last meeting), and distribution overviews.
+- **Deliverables**: R script for descriptive stats; markdown report with key metrics, missingness tables, and recency/last-meeting score notes where data allows.
 - **Estimated LOC**: ~140 | **Files**: ≤2
-- **Success Criteria**: Summary stats for scores and key offensive/defensive fields; missingness tables per column; basic frequency tables (teams); temporal coverage by season/week documented.
+- **Success Criteria**: Summary stats for scores and key offensive/defensive fields; missingness tables; basic frequency tables (teams); temporal coverage by season/week documented; derived `days_since_last_met` and last-meeting score fields computed where data exists (or clearly noted if unavailable).
 
 **Loop 2 - Univariate Analysis: Offensive Stats**
 - **Subordinate Goal**: Analyze distributions of offensive statistics (passing, rushing, turnovers) with standardized plots (e.g., z-scores) to compare across metrics.
@@ -128,11 +129,69 @@ https://github.com/BrightsizeLife/meta-model-v2/pull/9
 
 ## SIGNAL BLOCKS
 
+### SIGNAL BLOCK — Loop 3 Plan Created (Planner)
+
+- Agent: Planner
+- Result: PLAN_CREATED
+- Loop Summary: Redo the bootstrap EDA in-scope: one script + one markdown with missingness, distributions, bivariate previews, and recency fields; ensure plots show data.
+- Confidence: 8
+- Next: Actor
+- Context for Actor:
+  - **Files**: `reports/eda/01_descriptive_stats.R` (new) and `reports/eda/01_descriptive_stats.md` (new). Limit to these 2 files; delete/ignore prior Loop 1/2 artifacts if needed to stay within scope.
+  - **What to Change**:
+    1) Data load with fallback: prefer `data/processed/games_full.csv`; else join `data/processed/game_results.csv` + `data/processed/game_stats.csv` on `game_id`; if missing, stop with a clear, single-line message.
+    2) Compute/include in the markdown:
+       - Missingness table per column; temporal coverage (seasons, weeks).
+       - Numeric summaries for scores and key offensive/defensive stats.
+       - Team frequency table.
+       - Distribution plots that actually render data (hist/density or boxplots) for a few key stats; verify non-empty data before plotting.
+       - Bivariate previews: correlations or scatter summaries of scores vs top stats (passing yards, turnovers), and home vs away comparisons (z-score overlay optional).
+       - Recency fields: derive `days_since_last_met` from `last_met_date`/kickoff_time; attempt prior-meeting scores via the previous matchup; if unavailable, note it.
+    3) Keep the R script <150 LOC and the markdown concise (no TXT sprawl). Do not emit PNGs; embed inline plots or summarize succinctly.
+    4) Remove/ignore prior over-scope outputs as needed; ensure only the two files above are changed this loop.
+  - **What to Avoid**: No raw/processed edits; no dashboard; no more than 2 files changed; no PNG proliferation.
+  - **Subordinate Goal Win-State**: One R script + one markdown with working plots/tables, missingness/summary/bivariate/recency coverage, clear naming/append note; script LOC <150; only specified files changed.
+- Files in Scope: reports/eda/01_descriptive_stats.R, reports/eda/01_descriptive_stats.md
+- Estimated LOC: Script <150; markdown concise
+
+**Signature**: 4:3:1
+
+---
+
+### SIGNAL BLOCK — Loop 2 Judge Review (Goal 4)
+
+- Agent: Judge
+- Result: INSUFFICIENT
+- Loop Summary: Actor combined Loop 1 & 2 with multiple files/plots; outputs mostly empty plots; deviated from plan and file limits.
+- Confidence: 7
+- Next: Planner
+- Context:
+  - **Discrepancy Diagnosis**:
+    - Scope/constraints: Plan called for ≤2 files (reports/eda/01_descriptive_stats.R + .md). Actor created multiple files (2 scripts + 7 PNGs + TXT) exceeding file/LOC intent.
+    - Data source: Scripts hardcode `data/processed/games_full.csv` only; no fallback join of game_results + game_stats as planned.
+    - Deliverable mismatch: Report is a 991-line TXT, not the planned concise markdown; no naming note or append guidance.
+    - Visuals issue: Most plots are blank or missing plotted data (only boxplot shows data); distributions not rendering meaningful visuals.
+  - **Human Feedback**: “A lot of the graphs are missing any plotted data. only the boxplot in the /reports/eda folder shows anything. That's a big problem.”
+  - **Issues Found**: (1) Plan deviation (files/structure/fallback missing), (2) Visuals not rendering data, (3) Over file/LOC scope, (4) Report format mismatch and missing naming/append note.
+  - **Recommended Adjustments for Planner**:
+    1) Re-scope Loop 2 (or redo Loop 1+2) to stay within ≤2 files: one R script and one concise markdown report.
+    2) Implement data load fallback: prefer `games_full.csv`; if absent, join `game_results.csv` + `game_stats.csv` on game_id; stop with clear message if missing.
+    3) Fix plotting so data renders (check aesthetics/scales; ensure non-empty data and correct columns). Regenerate key plots with visible distributions.
+    4) Produce concise markdown with summary stats, missingness, key distributions, and naming/append note; avoid 900+ line TXT.
+    5) Keep outputs limited (only the planned report and, if necessary, a small set of validated plots) to respect file constraints.
+    6) Re-run and attach a brief summary of plots/data rendered; ensure images actually show data.
+- Test Summary: Tests/linter/security not run.
+- Issues Found: 4 (plan deviation, blank visuals, scope exceed, report format/naming gaps)
+
+**Signature**: 4:2:3
+
+---
+
 ### SIGNAL BLOCK — Loop 1 Plan Created (Planner)
 
 - Agent: Planner
 - Result: PLAN_CREATED
-- Loop Summary: Descriptive/missingness/bootstrap EDA using preferred naming (`game_results.csv`, `game_stats.csv`, `games_full.csv`) with distribution and bivariate previews (no dashboard).
+- Loop Summary: Descriptive/missingness/bootstrap EDA using preferred naming (`game_results.csv`, `game_stats.csv`, `games_full.csv`) with distributions, bivariate previews, and derived recency fields (time since last meeting, prior meeting scores where available) — no dashboard.
 - Confidence: 8
 - Next: Actor
 - Context for Actor:
@@ -145,10 +204,11 @@ https://github.com/BrightsizeLife/meta-model-v2/pull/9
        - Basic categorical frequencies (team counts).
        - Distribution snapshots for a handful of key stats (hist/density or boxplots) and note outliers.
        - Bivariate previews: quick correlations or scatter summaries of scores vs a few top stats (e.g., passing yards, turnovers) and home vs away comparisons (standardize/z-score where helpful for overlays).
-    3) Write concise `reports/eda/01_descriptive_stats.md` capturing findings and a short note on naming (game results vs game stats vs games_full) and how rerunning with updated processed files appends new data.
+       - Recency features: derive `days_since_last_met` using `last_met_date`/kickoff_time; attempt to capture last-meeting scores by looking up the immediately prior matchup (if data present). If not available, clearly note in the report.
+    3) Write concise `reports/eda/01_descriptive_stats.md` capturing findings and a short note on naming (game results vs game stats vs games_full), append workflow (rerun with updated processed files), and any recency/last-meeting data availability caveats.
     4) Keep script <150 LOC; no data writes beyond the markdown; no other files touched.
   - **What to Avoid**: Do not modify processed/raw data; no dashboard; stay within ≤2 files.
-  - **Subordinate Goal Win-State**: Script loads data with fallback, computes missingness/summary/distribution and bivariate previews, emits markdown with findings and naming/append note; only specified files changed; script LOC ≤150.
+  - **Subordinate Goal Win-State**: Script loads data with fallback, computes missingness/summary/distribution, bivariate previews, and recency fields (or clearly documents unavailability), emits markdown with findings and naming/append note; only specified files changed; script LOC ≤150.
 - Files in Scope: reports/eda/01_descriptive_stats.R, reports/eda/01_descriptive_stats.md
 - Estimated LOC: Script <150; markdown concise
 
