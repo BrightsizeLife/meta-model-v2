@@ -75,34 +75,42 @@ normalize_teams <- function(df) {
     )
 }
 
+# Load processed game results (has last_met_date populated)
+game_results_path <- "data/processed/game_results.csv"
+if (!file.exists(game_results_path)) {
+  cat("✗ game_results.csv not found. Run R/process_games.R first.\n")
+  quit(status = 1)
+}
+all_games <- read_csv(game_results_path, show_col_types = FALSE, col_types = cols())
+
 # Process seasons
 combined <- NULL
 
 for (season in seasons) {
   if (season == 2022) {
-    games_file <- "data/raw/2022_games.csv"
     stats_file <- "data/raw/game_stats_2022_w12-w18.csv"
   } else {
-    games_file <- sprintf("data/raw/%d_games.csv", season)
     stats_file <- sprintf("data/raw/game_stats_%d.csv", season)
   }
 
-  if (!file.exists(games_file) || !file.exists(stats_file)) {
-    cat(sprintf("  Skipping %d: files not found\n", season))
+  if (!file.exists(stats_file)) {
+    cat(sprintf("  Skipping %d: stats file not found\n", season))
     next
   }
 
-  games <- read_csv(games_file, show_col_types = FALSE, col_types = cols())
+  # Filter games from game_results.csv for this season
+  games <- all_games %>% filter(season == !!season)
+
+  if (nrow(games) == 0) {
+    cat(sprintf("  Skipping %d: no games in game_results.csv\n", season))
+    next
+  }
+
   stats <- read_csv(stats_file, show_col_types = FALSE, col_types = cols())
 
   # Normalize team names in both datasets
   games <- normalize_teams(games)
   stats <- normalize_teams(stats)
-
-  # For 2022, filter to weeks 12-18
-  if (season == 2022) {
-    games <- games %>% filter(week >= 12, week <= 18)
-  }
 
   # Join and select schema-ordered columns: identifiers + scores + stats + last_met_date
   merged <- games %>%
@@ -113,7 +121,12 @@ for (season in seasons) {
            all_of(STAT_COLS), last_met_date)
 
   cat(sprintf("  ✓ %d: %d games\n", season, nrow(merged)))
-  combined <- bind_rows(combined, merged)
+
+  if (is.null(combined)) {
+    combined <- merged
+  } else {
+    combined <- bind_rows(combined, merged)
+  }
 }
 
 if (is.null(combined) || nrow(combined) == 0) {
