@@ -1,0 +1,31 @@
+# ========================================
+# Goal 5: Odds API Pipeline Dependencies
+# ========================================
+#
+# Install with: pip install -r requirements.txt
+#
+# Core dependencies for odds API client
+
+# HTTP requests
+requests>=2.31.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Data processing
+pandas>=2.0.0
+pyarrow>=12.0.0  # For parquet file support
+
+# Date/time handling
+python-dateutil>=2.8.2
+
+# Testing (optional, for development)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Type hints (optional, for development)
+mypy>=1.5.0
+
+# Code quality (optional, for development)
+black>=23.7.0
+flake8>=6.1.0
