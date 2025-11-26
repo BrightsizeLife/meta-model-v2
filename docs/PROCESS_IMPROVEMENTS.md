@@ -309,3 +309,211 @@
 
 *Document created: 2024-11-24*
 *Based on: Goal 4 EDA completion retrospective*
+
+---
+
+# Goal 5: Odds API Pipeline
+
+**Status**: In Progress (Loop 5:1)
+**Updated**: 2024-11-25
+
+---
+
+## 🎯 **Goal 5 Objectives**
+
+Build a robust, quota-aware historical Odds API pipeline for NFL data (2022–2025) with:
+- Immutable historical archives by season
+- Processed probabilities from American odds
+- Free-tier testing before paid historical calls
+- Minimal weekly updater (stretch goal)
+
+**Key Challenge**: Historical odds are expensive (10 requests per game × markets). Must be quota-aware from the start.
+
+---
+
+## 🛡️ **Guardrails Implemented (Mandatory)**
+
+These guardrails address quota protection, data integrity, and API key security learned from Goal 4:
+
+### 1. **Quota Protection**
+- **DRY-RUN MODE by default** until Loop 5:6+
+- Every real API request requires human confirmation
+- Cost prediction before batch operations
+- Use `bookmakers=` filter (avoids regions multiplier)
+- Only use `market=h2h` (single market, not multiple)
+- Free-tier testing first, paid historical calls only after validation
+
+### 2. **Immutable Archives**
+- Once a season's archive is validated, its directory becomes **immutable**
+- No writes, renames, deletes, or merges allowed
+- Archive structure: `data/raw/odds_{YEAR}/{timestamp}/`
+- Only reading allowed after validation
+
+### 3. **Temporary Overwrites**
+- Allowed ONLY in: `tmp/` and `sandbox/`
+- Must be cleaned per-loop
+- Never overwrite validated archives
+
+### 4. **API Key Handling**
+- `.env` file only (gitignored)
+- `ODDS_API_KEY` required at runtime via `os.getenv()`
+- Actor must refuse code that embeds the key
+- No printing key in logs
+- No storing in config files or repo
+
+### 5. **One Branch, One PR**
+- All 12 loops contribute to single PR: `feat/goal5-odds-pipeline`
+- PR hygiene: ≤150 LOC OR ≤2 files changed per loop
+- Keeps changes focused and reviewable
+
+### 6. **Required Documentation Reading**
+- Agents must read/reference every loop:
+  - `docs/agent_docs/structure.md`
+  - `docs/agent_docs/codebase.md`
+  - `docs/agent_docs/prompts.md`
+  - `docs/agent_docs/agent_roles.md`
+  - `PROCESS.md`
+  - `current_cycle.md`
+
+### 7. **Judge Process Enforcement**
+- Judge must watch for and stop:
+  - Planner/Actor not following PROCESS.md
+  - Missing signal blocks
+  - Unapproved real API calls
+  - Missing guardrail references
+  - Deviations from loop objectives
+
+---
+
+## 🔄 **Process Improvements from Goal 4**
+
+### What We're Applying from Goal 4 Learnings:
+
+**1. Earlier Architectural Alignment**
+- Document API architecture upfront (Loop 5:1)
+- Clear separation: raw archives vs. processed outputs
+- Define data flow before writing code
+
+**2. Validation Throughout Process**
+- Don't wait until end to validate
+- Test each component immediately after creation
+- Quota headers validation on pilot pulls (Loop 5:5)
+
+**3. Consolidated Documentation**
+- Avoid documentation sprawl
+- Clear single source of truth for each topic
+- Archive iterative drafts separately
+
+**4. Signal Block Discipline**
+- Planner: Clear tasks, file scope, LOC estimates, guardrail references
+- Actor: Detailed completion blocks with signature format (Goal:Loop:Iteration)
+- Judge: Process checks, discrepancy detection, alignment status
+
+**5. Free-Tier Testing Strategy** (NEW)
+- Use free tier to validate pipeline logic
+- Only move to paid historical calls after confidence established
+- Prevents quota waste on bugs
+
+---
+
+## 📝 **Loop-by-Loop Progress Tracking**
+
+### Loop 5:1 — Setup & PR Init ✅ (Current)
+**What We Did**:
+- Created branch `feat/goal5-odds-pipeline`
+- Set up `.env` file with API key placeholder
+- Documented 7 mandatory guardrails
+- Opened draft PR
+
+**Guardrails Applied**:
+- No API calls (quota protection)
+- Documentation-only changes (≤2 files)
+- Branch naming standard followed
+
+**Learnings**:
+- _To be added as we progress_
+
+---
+
+### Loop 5:2 — API Client Scaffolding (Planned)
+**Objective**: Create `src/odds_api/` with base OddsAPI class
+**Guardrails**: Dry-run default, no real API calls, test harness only
+
+---
+
+### Loop 5:3 — Events Endpoint + Season Scaffolding (Planned)
+**Objective**: Use quota-free `/events` endpoint to build event ID cache
+**Guardrails**: Quota-free endpoint only, no historical calls
+
+---
+
+### Loop 5:4 — Historical Endpoint Test Harness (Planned)
+**Objective**: Implement dry-run harness for historical endpoint, cost prediction
+**Guardrails**: Dry-run only, print URLs and expected cost, no real calls
+
+---
+
+### Loop 5:5 — Pilot Pull (Planned)
+**Objective**: First real historical calls (2 games, human approved)
+**Guardrails**: Human confirmation required, quota header validation
+
+---
+
+### Loop 5:6+ — Batch & Full Extraction (Planned)
+**Objective**: Full season extractions with checkpointing
+**Guardrails**: Immutable archives, human approval for batch runs
+
+---
+
+## 🎓 **Key Learnings for Multi-Agent Flow Team**
+
+_This section will be updated throughout Goal 5 with insights for improving the multi-agent workflow._
+
+### From Loop 5:1:
+- **Guardrails upfront**: Documenting all mandatory rules in Loop 1 prevents violations later
+- **Living document approach**: Process improvements doc updated per-loop, not just at end
+- **Free-tier testing strategy**: Test pipeline logic before expensive operations
+
+### Future Learnings:
+- _To be added as we progress through loops 5:2-5:12_
+
+---
+
+## 🔮 **Anticipated Challenges**
+
+Based on Goal 4 experience and Goal 5 complexity:
+
+1. **Quota Management**: Historical odds are expensive - need robust cost prediction
+2. **Bookmaker Consistency**: Different bookmakers may have different coverage
+3. **Timestamp Alignment**: Selecting "final odds ≤ kickoff" requires careful timestamp handling
+4. **Archive Immutability**: Once validated, cannot fix errors - must be right first time
+5. **Free vs. Paid API Differences**: May behave differently, need to validate both
+
+---
+
+## ✅ **Success Metrics for Goal 5**
+
+**Process Quality**:
+- [ ] All 7 guardrails followed in every loop
+- [ ] No quota waste from bugs or unnecessary calls
+- [ ] Signal blocks present for all Planner/Actor/Judge interactions
+- [ ] LOC constraints met (≤150 per loop)
+- [ ] Single branch/PR maintained throughout
+
+**Technical Quality**:
+- [ ] Immutable archives for all 4 seasons (2022-2025)
+- [ ] Zero API key leaks in code/logs
+- [ ] Probability conversion validated
+- [ ] Processed parquet with all required fields
+- [ ] Free-tier testing passed before paid calls
+
+**Documentation Quality**:
+- [ ] Architecture decisions documented
+- [ ] API usage patterns clear
+- [ ] Cost analysis transparent
+- [ ] Multi-agent learnings captured
+
+---
+
+*Last Updated: 2024-11-25 (Loop 5:1)*
+*Living document - updated each loop*
