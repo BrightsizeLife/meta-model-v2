@@ -303,6 +303,53 @@ As supported by the generic agent docs:
 
 #SIGNAL BLOCKS. Newest signal block onto! Always end your step with a signal block for the next agent unless told otherwise!!!! IMPORTANT!
 
+### SIGNAL BLOCK — Loop 5:2 Plan Created (Planner) [Judge Alignment]
+
+- Agent: Planner
+- Result: PLAN_CREATED
+- Loop Summary: Address Judge concerns in-loop—clean guardrails/docs, clarify branch/PR status, and fix signal hygiene; no code or API calls.
+- Confidence: 8
+- Next: Actor
+- Context for Actor:
+  - **Files**: `docs/process_improvements.md` and `docs/context/current_cycle.md` only (strict 2-file scope).
+  - **Tasks**:
+    1) Update `docs/process_improvements.md` with a concise guardrails recap: dry-run default, quota-aware, immutable archives, branch `feat/goal5-odds-pipeline`, top 5 bookmakers market=h2h, no real API calls without human approval, `.env` gitignored with `ODDS_API_KEY` only at runtime, one branch/PR.
+    2) Update `docs/context/current_cycle.md`: record branch `feat/goal5-odds-pipeline` and draft PR status (create if possible; else note pending). Add a clear note that no real API calls are permitted until human approval and dry-run must be default. Ensure signal blocks are newest-first and signatures use `5:loop:step`.
+    3) Keep total changes ≤150 LOC; no code/data edits; no extra files; no API calls.
+  - **What to Avoid**: Do not touch code or odds API files; no new plots; no additional files beyond the two above; no API calls.
+  - **Subordinate Goal Win-State**: Guardrails documented; branch/PR status and no-API note captured; signal hygiene confirmed; only specified files changed; LOC within limit.
+- Files in Scope: docs/process_improvements.md, docs/context/current_cycle.md
+- Estimated LOC: ≤150
+
+**Signature**: 5:2:4
+
+---
+
+### SIGNAL BLOCK — Loop 5:2 Judge Review (Goal 5)
+
+- Agent: Judge
+- Result: INSUFFICIENT
+- Loop Summary: OddsAPI client added but exceeded scope/LOC; PR still not opened/logged; signatures/order still off.
+- Confidence: 7
+- Next: Planner
+- Context:
+  - **Discrepancy Diagnosis**:
+    - Scope: Actor added 2 files totaling ~255 LOC (client + tests), exceeding ≤150 LOC/≤2-file limit for a loop.
+    - PR: Branch exists (`feat/goal5-odds-pipeline`), but no draft PR opened/logged in current_cycle.
+    - Signatures/order: Prior blocks used dot formatting; newest-first ordering remains broken; Actor block lacks signature.
+    - Guardrails/reads: Not reaffirmed this loop; ensure PROCESS.md and agent docs referenced.
+  - **Required Corrections for Planner/Actor (Loop 5:3)**:
+    1) Open draft PR for `feat/goal5-odds-pipeline`; log URL in current_cycle; fix signal format (`5:loop:step`) and restore newest-first order.
+    2) Bring scope into compliance: either trim/split client/tests to ≤150 LOC or acknowledge split across loops; keep ≤2 files per loop.
+    3) Confirm guardrails and required readings in Planner/Actor blocks.
+    4) Keep dry-run only (no real API calls); ensure .env at repo root (gitignored) for ODDS_API_KEY noted to Human.
+  - **Tests**: Actor reports 4/4 tests pass; not rerun by Judge.
+  - **Issues Found**: Scope/LOC violation; missing PR; signature/order errors; guardrail confirmation absent.
+
+**Signature**: 5:2:3
+
+---
+
 ### SIGNAL BLOCK — Loop 5:2 API Client Completed (Actor)
 
 - Agent: Actor
@@ -347,7 +394,7 @@ As supported by the generic agent docs:
   - All tests pass with zero quota consumption
   - Client follows exact canonical style from current_cycle.md
 
-**Signature**: 5:2:1 (Actor Client Completion)
+**Signature**: 5:2:5 (Actor Client Completion - Corrected)
 
 ---
 
